@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "mcq-01",
+      "type": "mcq",
+      "topic": "files",
+      "prompt": "في التعامل مع الملفات، ما هو الوضع (Mode) الذي يقوم بمسح محتويات الملف السابقة والكتابة من جديد؟",
+      "options": [
+        "ios::app",
+        "ios::ate",
+        "ios::trunc",
+        "ios::in"
+      ],
+      "correct": 2,
+      "explanation": "الوضع ios::trunc يمسح محتوى الملف الموجود ويبدأ الكتابة من جديد، وهو السلوك الافتراضي مع ofstream."
+    },
+    {
+      "id": "mcq-02",
+      "type": "mcq",
+      "topic": "files",
+      "prompt": "أي مكتبة يجب تضمينها (#include) للعمل مع الملفات النصية في C++؟",
+      "options": [
+        "<iostream>",
+        "<fstream>",
+        "<string>",
+        "<cmath>"
+      ],
+      "correct": 1,
+      "explanation": "المكتبة <fstream> تحتوي على ifstream و ofstream و fstream للتعامل مع الملفات."
+    },
+    {
+      "id": "mcq-03",
+      "type": "mcq",
+      "topic": "files",
+      "prompt": "إذا أردنا إضافة سطر جديد في نهاية ملف موجود مسبقاً دون مسح محتواه، نستخدم:",
+      "options": [
+        "ios::trunc",
+        "ios::app",
+        "ios::binary",
+        "ios::in"
+      ],
+      "correct": 1,
+      "explanation": "الوضع ios::app (append) يضيف الكتابة في نهاية الملف دون المساس بالمحتوى السابق."
+    },
+    {
+      "id": "mcq-04",
+      "type": "mcq",
+      "topic": "files",
+      "prompt": "ما هو الكائن (Object) المستخدم لقراءة البيانات من الملف؟",
+      "options": [
+        "ofstream",
+        "ifstream",
+        "fstream",
+        "iostream"
+      ],
+      "correct": 1,
+      "explanation": "ifstream (input file stream) هو الكائن المخصص للقراءة من الملفات."
+    },
+    {
+      "id": "mcq-05",
+      "type": "mcq",
+      "topic": "files",
+      "prompt": "أي دالة تُستخدم لإغلاق الملف بعد الانتهاء من العمليات عليه؟",
+      "options": [
+        "end()",
+        "stop()",
+        "close()",
+        "delete()"
+      ],
+      "correct": 2,
+      "explanation": "الدالة close() تُغلق الملف وتضمن حفظ البيانات وتحرير الموارد."
+    },
+    {
+      "id": "mcq-06",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "إذا كان لدينا مصفوفة أحادية الأبعاد معرفة كالتالي: int arr[5]; فما هو الفهرس (Index) للعنصر الأخير فيها؟",
+      "options": [
+        "5",
+        "4",
+        "6",
+        "1"
+      ],
+      "correct": 1,
+      "explanation": "الفهرسة تبدأ من 0، فمصفوفة حجمها 5 تكون فهارسها من 0 إلى 4."
+    },
+    {
+      "id": "mcq-07",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "في المصفوفات الثنائية (2D Arrays)، كيف نصل إلى العنصر الموجود في الصف الثالث والعمود الثاني؟",
+      "options": [
+        "arr[3][2]",
+        "arr[2][1]",
+        "arr[3][1]",
+        "arr[2][3]"
+      ],
+      "correct": 1,
+      "explanation": "الصف الثالث فهرسه 2 والعمود الثاني فهرسه 1، لذلك arr[2][1]."
+    },
+    {
+      "id": "mcq-08",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "لحساب مجموع عناصر القطر الرئيسي (Main Diagonal) في مصفوفة مربعة، ما هو الشرط الذي نضعه داخل الحلقة؟",
+      "options": [
+        "if(i > j)",
+        "if(i == j)",
+        "if(i < j)",
+        "if(i != j)"
+      ],
+      "correct": 1,
+      "explanation": "عناصر القطر الرئيسي هي التي يتساوى فيها رقم الصف مع رقم العمود: i == j."
+    },
+    {
+      "id": "mcq-09",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "ماذا يحدث إذا حاولت الوصول إلى عنصر برقم فهرس أكبر من حجم المصفوفة؟",
+      "options": [
+        "يعطي القيمة صفر",
+        "يحدث خطأ في وقت التشغيل (Out of Bounds)",
+        "يتم حذف المصفوفة",
+        "لا يحدث شيء"
+      ],
+      "correct": 1,
+      "explanation": "الوصول خارج الحدود سلوك غير معرّف (Undefined Behavior)، وقد يسبب انهيار البرنامج أو قراءة قيمة عشوائية."
+    },
+    {
+      "id": "mcq-10",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "إذا تم تعريف مصفوفة `int A[3][4];`، فكم عدد العناصر التي يمكنها استيعابها؟",
+      "options": [
+        "7",
+        "12",
+        "34",
+        "3"
+      ],
+      "correct": 1,
+      "explanation": "عدد العناصر = عدد الصفوف × عدد الأعمدة = 3 × 4 = 12."
+    },
+    {
+      "id": "mcq-11",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "كيف نمر على جميع عناصر المصفوفة الثنائية؟",
+      "options": [
+        "باستخدام حلقة for واحدة",
+        "باستخدام حلقتين متداخلتين (Nested Loops)",
+        "باستخدام while فقط",
+        "لا يمكن المرور عليها"
+      ],
+      "correct": 1,
+      "explanation": "حلقة خارجية للصفوف وحلقة داخلية للأعمدة، وهذا ما نسميه الحلقات المتداخلة."
+    },
+    {
+      "id": "mcq-12",
+      "type": "mcq",
+      "topic": "arrays",
+      "prompt": "في المصفوفة `int nums[5] = {10, 20};`، ما هي قيمة `nums[3]`؟",
+      "options": [
+        "20",
+        "0",
+        "3",
+        "خطأ"
+      ],
+      "correct": 1,
+      "explanation": "العناصر غير المحددة في قائمة التهيئة تُملأ بالصفر تلقائياً، فتكون nums[3] = 0."
+    },
+    {
+      "id": "mcq-13",
+      "type": "mcq",
+      "topic": "functions",
+      "prompt": "عند تمرير المتغيرات للدوال باستخدام (Pass by Reference)، ماذا يحدث للمتغير الأصلي إذا تم تغييره داخل الدالة؟",
+      "options": [
+        "لا يتغير نهائياً",
+        "يتغير لأن الدالة تتعامل مع نفس عنوان الذاكرة",
+        "يتم إنشاء نسخة جديدة ويُحذف الأصلي",
+        "يعطي خطأ برمجي"
+      ],
+      "correct": 1,
+      "explanation": "التمرير بالمرجع يجعل المعامل اسماً بديلاً للمتغير الأصلي، فأي تعديل داخل الدالة ينعكس عليه."
+    },
+    {
+      "id": "mcq-14",
+      "type": "mcq",
+      "topic": "functions",
+      "prompt": "ما هو نوع الإرجاع (Return Type) للدالة التي لا تُرجع أي قيمة؟",
+      "options": [
+        "int",
+        "return",
+        "void",
+        "null"
+      ],
+      "correct": 2,
+      "explanation": "الدالة التي لا تُرجع قيمة نعرّفها من النوع void."
+    },
+    {
+      "id": "mcq-15",
+      "type": "mcq",
+      "topic": "functions",
+      "prompt": "ماذا نعني بنطاق المتغير (Variable Scope)؟",
+      "options": [
+        "حجم المتغير في الذاكرة",
+        "المكان الذي يمكن فيه استخدام المتغير داخل الكود",
+        "قيمة المتغير الابتدائية",
+        "نوع بيانات المتغير"
+      ],
+      "correct": 1,
+      "explanation": "نطاق المتغير هو المنطقة من الكود التي يكون فيها المتغير معروفاً ويمكن استخدامه."
+    },
+    {
+      "id": "mcq-16",
+      "type": "mcq",
+      "topic": "functions",
+      "prompt": "إذا كانت الدالة معرفة بعد الدالة `main()`، فماذا نحتاج أن نضع قبل `main()`؟",
+      "options": [
+        "لا شيء",
+        "نموذج الدالة (Function Prototype)",
+        "المتغيرات العامة",
+        "نستدعيها مرتين"
+      ],
+      "correct": 1,
+      "explanation": "نكتب نموذج الدالة (Prototype) قبل main ليعرف المترجم الدالة قبل استدعائها."
+    },
+    {
+      "id": "mcq-17",
+      "type": "mcq",
+      "topic": "pointers",
+      "prompt": "ما هو الفرق الأساسي بين المؤشر (Pointer) والمتغير العادي؟",
+      "options": [
+        "المؤشر يخزن القيمة، والمتغير يخزن العنوان",
+        "المؤشر يخزن عنوان متغير آخر في الذاكرة",
+        "لا يوجد فرق بينهما",
+        "المؤشر يستخدم فقط مع النصوص"
+      ],
+      "correct": 1,
+      "explanation": "المؤشر متغير يخزّن عنوان متغير آخر في الذاكرة وليس قيمته."
+    },
+    {
+      "id": "mcq-18",
+      "type": "mcq",
+      "topic": "pointers",
+      "prompt": "أي رمز يُستخدم للوصول إلى عنوان المتغير في المؤشرات؟",
+      "options": [
+        "*",
+        "&",
+        "#",
+        "@"
+      ],
+      "correct": 1,
+      "explanation": "العامل & يعطي عنوان المتغير في الذاكرة."
+    },
+    {
+      "id": "mcq-19",
+      "type": "mcq",
+      "topic": "pointers",
+      "prompt": "أي رمز يُستخدم للوصول إلى القيمة التي يشير إليها المؤشر؟",
+      "options": [
+        "*",
+        "&",
+        "#",
+        "@"
+      ],
+      "correct": 0,
+      "explanation": "العامل * (Dereference) يعطي القيمة المخزنة في العنوان الذي يشير إليه المؤشر."
+    },
+    {
+      "id": "mcq-20",
+      "type": "mcq",
+      "topic": "pointers",
+      "prompt": "إذا كان لدينا مؤشر `ptr` يشير إلى مصفوفة، فماذا يعني `ptr + 1`؟",
+      "options": [
+        "إضافة 1 إلى قيمة العنصر",
+        "الانتقال إلى العنصر التالي في المصفوفة",
+        "إضافة 1 إلى عنوان الذاكرة فقط دون تغيير القيمة",
+        "خطأ برمجي"
+      ],
+      "correct": 1,
+      "explanation": "حساب المؤشرات يتحرك بحجم النوع، فـ ptr + 1 تعني العنصر التالي في المصفوفة."
+    },
+    {
+      "id": "mcq-21",
+      "type": "mcq",
+      "topic": "recursion",
+      "prompt": "في الدوال التكرارية (Recursive Functions)، ما الذي يمنع الدالة من الاستدعاء اللانهائي لنفسها؟",
+      "options": [
+        "return 0;",
+        "حالة التوقف (Base Case)",
+        "حلقة التكرار for",
+        "استخدام المؤشرات"
+      ],
+      "correct": 1,
+      "explanation": "حالة التوقف (Base Case) هي الشرط الذي ينهي الاستدعاءات الذاتية ويمنع التكرار اللانهائي."
+    },
+    {
+      "id": "mcq-22",
+      "type": "mcq",
+      "topic": "recursion",
+      "prompt": "ما هو ناتج 5! (مضروب 5) باستخدام دالة تكرارية؟",
+      "options": [
+        "15",
+        "120",
+        "25",
+        "24"
+      ],
+      "correct": 1,
+      "explanation": "5! = 5 × 4 × 3 × 2 × 1 = 120."
+    },
+    {
+      "id": "mcq-23",
+      "type": "mcq",
+      "topic": "recursion",
+      "prompt": "في دالة المضروب التكرارية، ما هو الشرط الأساسي للتوقف (Base Case)؟",
+      "options": [
+        "if(n == 1) return 0;",
+        "if(n == 0 || n == 1) return 1;",
+        "if(n > 1) return n;",
+        "لا يوجد شرط"
+      ],
+      "correct": 1,
+      "explanation": "المضروب لـ 0 و 1 يساوي 1، وهذه هي حالة التوقف الصحيحة."
+    },
+    {
+      "id": "mcq-24",
+      "type": "mcq",
+      "topic": "recursion",
+      "prompt": "ما هو المبدأ الأساسي لعمل الدالة التكرارية؟",
+      "options": [
+        "استدعاء دالة أخرى",
+        "استدعاء الدالة لنفسها",
+        "استخدام حلقات لا نهائية",
+        "عدم استخدام return"
+      ],
+      "correct": 1,
+      "explanation": "الدالة التكرارية هي التي تستدعي نفسها لحل نسخة أصغر من نفس المسألة."
+    },
+    {
+      "id": "fix-01",
+      "type": "fixCode",
+      "topic": "arrays",
+      "prompt": "صحح الكود التالي (خطأ في حدود المصفوفة)",
+      "code": "int arr[5] = {1,2,3,4,5};\ncout << arr[5];",
+      "keywords": [
+        "arr[4]",
+        "cout"
+      ],
+      "sample": "cout << arr[4];"
+    },
+    {
+      "id": "fix-02",
+      "type": "fixCode",
+      "topic": "arrays",
+      "prompt": "صحح الكود التالي (خطأ في حلقة المصفوفة الثنائية)",
+      "code": "int arr[2][3];\nfor(int i=0; i<3; i++) {\n  for(int j=0; j<2; j++) cin >> arr[i][j];\n}",
+      "keywords": [
+        "i<2",
+        "j<3"
+      ],
+      "sample": "for(int i=0; i<2; i++) {\n  for(int j=0; j<3; j++) cin >> arr[i][j];\n}"
+    },
+    {
+      "id": "fix-03",
+      "type": "fixCode",
+      "topic": "arrays",
+      "prompt": "صحح الكود التالي (خطأ في القطر الرئيسي)",
+      "code": "for(int i=0; i<3; i++){\n  for(int j=0; j<3; j++){\n    if(i != j) sum += matrix[i][j];\n  }\n}",
+      "keywords": [
+        "i == j"
+      ],
+      "sample": "if(i == j) sum += matrix[i][j];"
+    },
+    {
+      "id": "fix-04",
+      "type": "fixCode",
+      "topic": "arrays",
+      "prompt": "صحح الكود التالي (خطأ في تهيئة المصفوفة)",
+      "code": "int nums[3] = (1, 2, 3);",
+      "keywords": [
+        "{",
+        "}"
+      ],
+      "sample": "int nums[3] = {1, 2, 3};"
+    },
+    {
+      "id": "fix-05",
+      "type": "fixCode",
+      "topic": "functions",
+      "prompt": "صحح الكود التالي (خطأ في إرسال المتغيرات بالمرجع)",
+      "code": "void change(int x) { x = 5; }\nint main() { int a = 1; change(a); }",
+      "keywords": [
+        "&"
+      ],
+      "sample": "void change(int &x) { x = 5; }"
+    },
+    {
+      "id": "fix-06",
+      "type": "fixCode",
+      "topic": "functions",
+      "prompt": "صحح الكود التالي (دالة لا ترجع قيمة ولكنها معرفة كـ int)",
+      "code": "int printMsg() {\n  cout << \"Hello\";\n}",
+      "keywords": [
+        "void"
+      ],
+      "sample": "void printMsg() {\n  cout << \"Hello\";\n}"
+    },
+    {
+      "id": "fix-07",
+      "type": "fixCode",
+      "topic": "functions",
+      "prompt": "صحح الكود التالي (نسيان إرجاع القيمة)",
+      "code": "int add(int a, int b) {\n  int sum = a + b;\n}",
+      "keywords": [
+        "return",
+        "sum"
+      ],
+      "sample": "int add(int a, int b) {\n  int sum = a + b;\n  return sum;\n}"
+    },
+    {
+      "id": "fix-08",
+      "type": "fixCode",
+      "topic": "pointers",
+      "prompt": "صحح الكود التالي (خطأ في تعريف المؤشر)",
+      "code": "int x = 10;\nint ptr = &x;",
+      "keywords": [
+        "*",
+        "&"
+      ],
+      "sample": "int *ptr = &x;"
+    },
+    {
+      "id": "fix-09",
+      "type": "fixCode",
+      "topic": "pointers",
+      "prompt": "صحح الكود التالي (خطأ في الوصول لقيمة المؤشر)",
+      "code": "int x = 10;\nint *ptr = &x;\ncout << ptr;",
+      "keywords": [
+        "*ptr"
+      ],
+      "sample": "cout << *ptr;"
+    },
+    {
+      "id": "fix-10",
+      "type": "fixCode",
+      "topic": "pointers",
+      "prompt": "صحح الكود التالي (خطأ في ربط المؤشر بالمتغير)",
+      "code": "int x = 5;\nint *ptr;\nptr = x;",
+      "keywords": [
+        "&x"
+      ],
+      "sample": "ptr = &x;"
+    },
+    {
+      "id": "fix-11",
+      "type": "fixCode",
+      "topic": "files",
+      "prompt": "صحح الكود التالي (خطأ في فتح الملف للكتابة)",
+      "code": "#include <fstream>\nofstream file;\nfile.open(\"data.txt\");\nfile >> \"Hello\";",
+      "keywords": [
+        "<<"
+      ],
+      "sample": "file << \"Hello\";"
+    },
+    {
+      "id": "fix-12",
+      "type": "fixCode",
+      "topic": "files",
+      "prompt": "صحح الكود التالي (خطأ في الطباعة من الملف)",
+      "code": "ifstream fin;\nfin.open(\"test.txt\");\ncin >> line;",
+      "keywords": [
+        "fin",
+        "getline"
+      ],
+      "sample": "fin >> line; // أو fin.getline(line, 80);"
+    },
+    {
+      "id": "fix-13",
+      "type": "fixCode",
+      "topic": "files",
+      "prompt": "صحح الكود التالي (نسيان مكتبة الملفات)",
+      "code": "#include <iostream>\nusing namespace std;\nint main() { ofstream f; }",
+      "keywords": [
+        "#include",
+        "<fstream>"
+      ],
+      "sample": "#include <fstream>"
+    },
+    {
+      "id": "fix-14",
+      "type": "fixCode",
+      "topic": "files",
+      "prompt": "صحح الكود التالي (نسيان إغلاق الملف)",
+      "code": "ofstream fout;\nfout.open(\"a.txt\");\nfout << \"Hi\";",
+      "keywords": [
+        "close"
+      ],
+      "sample": "fout << \"Hi\";\nfout.close();"
+    },
+    {
+      "id": "fix-15",
+      "type": "fixCode",
+      "topic": "recursion",
+      "prompt": "صحح الكود التالي (دالة تكرارية بدون حالة توقف)",
+      "code": "int fact(int n) {\n  return n * fact(n-1);\n}",
+      "keywords": [
+        "if",
+        "return 1"
+      ],
+      "sample": "int fact(int n) {\n  if(n <= 1) return 1;\n  return n * fact(n-1);\n}"
+    },
+    {
+      "id": "fix-16",
+      "type": "fixCode",
+      "topic": "recursion",
+      "prompt": "صحح الكود التالي (خطأ في استدعاء الدالة التكرارية)",
+      "code": "int power(int x, int n) {\n  if(n==0) return 1;\n  return x * power(x, n);\n}",
+      "keywords": [
+        "n-1"
+      ],
+      "sample": "return x * power(x, n-1);"
+    },
+    {
+      "id": "code-01",
+      "type": "writeCode",
+      "topic": "pointers",
+      "prompt": "اكتب سطراً برمجياً لتعريف مؤشر (ptr) يشير إلى متغير صحيح (x).",
+      "keywords": [
+        "int",
+        "*",
+        "&"
+      ],
+      "sample": "int *ptr = &x;"
+    },
+    {
+      "id": "code-02",
+      "type": "writeCode",
+      "topic": "pointers",
+      "prompt": "اكتب سطراً برمجياً للوصول إلى قيمة المتغير الذي يشير إليه المؤشر (ptr) وطباعته باستخدام cout.",
+      "keywords": [
+        "cout",
+        "*ptr"
+      ],
+      "sample": "cout << *ptr;"
+    },
+    {
+      "id": "code-03",
+      "type": "writeCode",
+      "topic": "pointers",
+      "prompt": "اكتب سطر برمجي لطباعة عنوان الذاكرة الخاص بالمتغير (x).",
+      "keywords": [
+        "cout",
+        "&x"
+      ],
+      "sample": "cout << &x;"
+    },
+    {
+      "id": "code-04",
+      "type": "writeCode",
+      "topic": "files",
+      "prompt": "اكتب كود يفتح ملف نصي باسم \"myFile.txt\" للقراءة (Reading) باستخدام ifstream باسم الكائن (inFile).",
+      "keywords": [
+        "ifstream",
+        "open",
+        "myFile.txt"
+      ],
+      "sample": "ifstream inFile;\ninFile.open(\"myFile.txt\");"
+    },
+    {
+      "id": "code-05",
+      "type": "writeCode",
+      "topic": "files",
+      "prompt": "اكتب كود لإنشاء ملف باسم \"out.txt\" للكتابة باستخدام ofstream.",
+      "keywords": [
+        "ofstream",
+        "open",
+        "out.txt"
+      ],
+      "sample": "ofstream fout;\nfout.open(\"out.txt\");"
+    },
+    {
+      "id": "code-06",
+      "type": "writeCode",
+      "topic": "files",
+      "prompt": "اكتب سطر برمجي يضيف الكلمة \"Hello\" إلى ملف مفتوح باسم الكائن (file).",
+      "keywords": [
+        "file",
+        "<<",
+        "Hello"
+      ],
+      "sample": "file << \"Hello\";"
+    },
+    {
+      "id": "code-07",
+      "type": "writeCode",
+      "topic": "functions",
+      "prompt": "اكتب دالة (Function) اسمها maxNum تستقبل عددين صحيحين a و b، وتُرجع العدد الأكبر منهما.",
+      "keywords": [
+        "int",
+        "maxNum",
+        "if",
+        "return",
+        ">"
+      ],
+      "sample": "int maxNum(int a, int b) {\n  if(a > b) return a;\n  else return b;\n}"
+    },
+    {
+      "id": "code-08",
+      "type": "writeCode",
+      "topic": "functions",
+      "prompt": "اكتب تعريف دالة (Void Function) اسمها printHello لا تستقبل أي معاملات وتطبع جملة \"Hello World\".",
+      "keywords": [
+        "void",
+        "printHello",
+        "cout",
+        "Hello World"
+      ],
+      "sample": "void printHello() {\n  cout << \"Hello World\";\n}"
+    },
+    {
+      "id": "code-09",
+      "type": "writeCode",
+      "topic": "functions",
+      "prompt": "اكتب دالة اسمها swap تستقبل متغيرين بالمرجع (Pass by Reference) وتقوم بتبديل قيمتهما.",
+      "keywords": [
+        "void",
+        "swap",
+        "&",
+        "temp"
+      ],
+      "sample": "void swap(int &a, int &b) {\n  int temp = a;\n  a = b;\n  b = temp;\n}"
+    },
+    {
+      "id": "code-10",
+      "type": "writeCode",
+      "topic": "arrays",
+      "prompt": "اكتب جزءاً من الكود لحساب مجموع عناصر القطر الرئيسي (Main Diagonal) لمصفوفة ثنائية (matrix) حجمها 3x3 باستخدام حلقة for واحدة فقط.",
+      "keywords": [
+        "for",
+        "sum",
+        "+=",
+        "[i][i]"
+      ],
+      "sample": "int sum = 0;\nfor(int i=0; i<3; i++) {\n  sum += matrix[i][i];\n}"
+    },
+    {
+      "id": "code-11",
+      "type": "writeCode",
+      "topic": "arrays",
+      "prompt": "اكتب كود لتعريف مصفوفة أحادية الأبعاد من نوع صحيح (int) اسمها arr وتحتوي على 10 عناصر.",
+      "keywords": [
+        "int",
+        "arr",
+        "[10]"
+      ],
+      "sample": "int arr[10];"
+    },
+    {
+      "id": "code-12",
+      "type": "writeCode",
+      "topic": "arrays",
+      "prompt": "اكتب حلقة for للدوران على مصفوفة أحادية اسمها arr من 0 إلى 9.",
+      "keywords": [
+        "for",
+        "int",
+        "i",
+        "0",
+        "10",
+        "i++"
+      ],
+      "sample": "for(int i=0; i<10; i++)"
+    },
+    {
+      "id": "code-13",
+      "type": "writeCode",
+      "topic": "arrays",
+      "prompt": "اكتب كود لتعريف مصفوفة ثنائية الأبعاد اسمها matrix من 3 صفوف و 4 أعمدة.",
+      "keywords": [
+        "int",
+        "matrix",
+        "[3][4]"
+      ],
+      "sample": "int matrix[3][4];"
+    },
+    {
+      "id": "code-14",
+      "type": "writeCode",
+      "topic": "recursion",
+      "prompt": "اكتب السطر الأساسي داخل دالة المضروب (fact) الذي يقوم باستدعاء الدالة لنفسها (Recursive Call).",
+      "keywords": [
+        "return",
+        "fact",
+        "n-1"
+      ],
+      "sample": "return n * fact(n-1);"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#0b6e6e"/>
+  <text x="256" y="300" font-family="monospace" font-weight="700" font-size="190" text-anchor="middle" fill="#ffffff">C++</text>
+  <rect x="136" y="338" width="240" height="22" rx="11" fill="#ffd23f"/>
+</svg>
