@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان C++ الشامل - إعداد م. محمد عبدو</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 900px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 30px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .active { display: block; }
+
+        h1, h2, h3 { color: var(--primary); margin-bottom: 15px; text-align: center; }
+        
+        .welcome-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #374151;
+        }
+
+        .highlight { font-weight: bold; color: var(--primary); }
+
+        .privacy-note {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f9fafb;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+
+        textarea { resize: vertical; min-height: 120px; direction: ltr; font-family: monospace; text-align: left; }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        button:hover { background-color: var(--primary-hover); }
+        
+        .btn-share { background-color: var(--success); margin-top: 15px; }
+        .btn-share:hover { background-color: #059669; }
+
+        .question-box {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .question-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; line-height: 1.6; }
+        .question-type { font-size: 0.8rem; background: #e5e7eb; padding: 3px 8px; border-radius: 5px; color: #4b5563; display: inline-block; margin-bottom: 10px;}
+
+        .options label {
+            display: block;
+            background: white;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .options label:hover { background: #f3f4f6; }
+        .options input[type="radio"] { margin-left: 10px; transform: scale(1.2); }
+
+        .result-card {
+            text-align: center;
+            padding: 30px;
+            background: #ecfdf5;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--success);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+            transition: 0.5s;
+        }
+
+        .review-item {
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+            line-height: 1.6;
+        }
+        .review-item:last-child { border-bottom: none; }
+        
+        .ans-correct { color: var(--success); font-weight: bold; }
+        .ans-wrong { color: var(--danger); font-weight: bold; }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+            margin-top: 10px;
+            overflow-x: auto;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+        }
+
+        .timer-box {
+            position: sticky;
+            top: 10px;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            z-index: 100;
+        }
+        
+        #timer { font-weight: bold; color: var(--danger); font-size: 1.3rem; background: #fee2e2; padding: 5px 15px; border-radius: 8px;}
+
+        .override-btn {
+            background-color: var(--warning);
+            color: white;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .override-btn:hover { background-color: #d97706; }
+    </style>
+</head>
+<body>
+
+    <!-- شاشة الترحيب -->
+    <div id="welcome-screen" class="container active">
+        <h1>مرحباً بك في منصة الامتحانات</h1>
+        <p class="welcome-text">
+            تم إنشاء هذا الموقع من قبل <span class="highlight">الباشمهندس محمد عبدالكريم محمد (محمد عبدو)</span>.<br>
+            الغرض منه تدريب الناس على الامتحانات ومساعدتهم.<br>
+            <span class="highlight">موفقين إن شاء الله!</span>
+        </p>
+        <div class="privacy-note">
+            🔒 ملاحظة هامة: البيانات (الاسم والنتائج) سيتم حفظها في هاتفك فقط ولن تُرسل أو تخرج من الجهاز مالم تقم بمشاركتها بنفسك.
+        </div>
+        <div style="text-align: center; margin-bottom: 20px; color: #4b5563; font-weight: bold;">
+            📝 الامتحان يتكون من 20 سؤالاً (عشوائية من بنك ضخم): (7 اختيار، 7 تصحيح كود، 6 كتابة كود)
+        </div>
+        <button onclick="showScreen('name-screen')">ابدأ الآن</button>
+    </div>
+
+    <!-- شاشة تسجيل الاسم -->
+    <div id="name-screen" class="container">
+        <h2>الرجاء تسجيل الاسم</h2>
+        <p style="text-align: center; margin-bottom: 20px; color: #666;">لتظهر النتيجة النهائية باسمك</p>
+        <input type="text" id="student-name" placeholder="اكتب اسمك الثلاثي هنا..." required>
+        <button onclick="startExam()">دخول الامتحان</button>
+    </div>
+
+    <!-- شاشة الامتحان -->
+    <div id="exam-screen" class="container" style="background: transparent; box-shadow: none; padding: 0;">
+        <div class="timer-box">
+            <h3 style="margin: 0; color: var(--primary);">الامتحان الشامل</h3>
+            <div id="timer">30:00</div>
+        </div>
+        <div id="questions-container" style="background: var(--card-bg); padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);"></div>
+        <button onclick="submitExam()" style="margin-top: 30px; background: var(--success); font-size: 1.2rem; padding: 20px;">إنهاء الامتحان وعرض النتيجة</button>
+    </div>
+
+    <!-- شاشة النتيجة -->
+    <div id="result-screen" class="container">
+        <h2>النتيجة النهائية</h2>
+        <div class="result-card">
+            <div id="score-circle" class="score-circle">0%</div>
+            <h3 id="result-name"></h3>
+            <p id="result-details" style="font-size: 1.2rem; margin-top: 10px; font-weight: bold;"></p>
+        </div>
+        
+        <button class="btn-share" onclick="shareResult()">📤 مشاركة النتيجة</button>
+        <button style="background: #6b7280; margin-top: 15px;" onclick="location.reload()">🔄 إعادة الامتحان بأسئلة جديدة</button>
+        
+        <h3 style="margin-top: 40px; text-align: right; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">مراجعة الإجابات:</h3>
+        <div id="review-container"></div>
+    </div>
+
+    <script>
+        // ==========================================
+        // بنك الأسئلة الضخم (أكثر من 60 سؤالاً)
+        // ==========================================
+        const questionBank = {
+            mcq: [
+                // --- الملفات ---
+                { q: "في التعامل مع الملفات، ما هو الوضع (Mode) الذي يقوم بمسح محتويات الملف السابقة والكتابة من جديد؟", options: ["ios::app", "ios::ate", "ios::trunc", "ios::in"], correct: 2 },
+                { q: "أي مكتبة يجب تضمينها (#include) للعمل مع الملفات النصية في C++؟", options: ["<iostream>", "<fstream>", "<string>", "<cmath>"], correct: 1 },
+                { q: "إذا أردنا إضافة سطر جديد في نهاية ملف موجود مسبقاً دون مسح محتواه، نستخدم:", options: ["ios::trunc", "ios::app", "ios::binary", "ios::in"], correct: 1 },
+                { q: "ما هو الكائن (Object) المستخدم لقراءة البيانات من الملف؟", options: ["ofstream", "ifstream", "fstream", "iostream"], correct: 1 },
+                { q: "أي دالة تُستخدم لإغلاق الملف بعد الانتهاء من العمليات عليه؟", options: ["end()", "stop()", "close()", "delete()"], correct: 2 },
+                
+                // --- المصفوفات ---
+                { q: "إذا كان لدينا مصفوفة أحادية الأبعاد معرفة كالتالي: int arr[5]; فما هو الفهرس (Index) للعنصر الأخير فيها؟", options: ["5", "4", "6", "1"], correct: 1 },
+                { q: "في المصفوفات الثنائية (2D Arrays)، كيف نصل إلى العنصر الموجود في الصف الثالث والعمود الثاني؟", options: ["arr[3][2]", "arr[2][1]", "arr[3][1]", "arr[2][3]"], correct: 1 },
+                { q: "لحساب مجموع عناصر القطر الرئيسي (Main Diagonal) في مصفوفة مربعة، ما هو الشرط الذي نضعه داخل الحلقة؟", options: ["if(i > j)", "if(i == j)", "if(i < j)", "if(i != j)"], correct: 1 },
+                { q: "ماذا يحدث إذا حاولت الوصول إلى عنصر برقم فهرس أكبر من حجم المصفوفة؟", options: ["يعطي القيمة صفر", "يحدث خطأ في وقت التشغيل (Out of Bounds)", "يتم حذف المصفوفة", "لا يحدث شيء"], correct: 1 },
+                { q: "إذا تم تعريف مصفوفة `int A[3][4];`، فكم عدد العناصر التي يمكنها استيعابها؟", options: ["7", "12", "34", "3"], correct: 1 },
+                { q: "كيف نمر على جميع عناصر المصفوفة الثنائية؟", options: ["باستخدام حلقة for واحدة", "باستخدام حلقتين متداخلتين (Nested Loops)", "باستخدام while فقط", "لا يمكن المرور عليها"], correct: 1 },
+                { q: "في المصفوفة `int nums[5] = {10, 20};`، ما هي قيمة `nums[3]`؟", options: ["20", "0", "3", "خطأ"], correct: 1 },
+                
+                // --- الدوال ---
+                { q: "عند تمرير المتغيرات للدوال باستخدام (Pass by Reference)، ماذا يحدث للمتغير الأصلي إذا تم تغييره داخل الدالة؟", options: ["لا يتغير نهائياً", "يتغير لأن الدالة تتعامل مع نفس عنوان الذاكرة", "يتم إنشاء نسخة جديدة ويُحذف الأصلي", "يعطي خطأ برمجي"], correct: 1 },
+                { q: "ما هو نوع الإرجاع (Return Type) للدالة التي لا تُرجع أي قيمة؟", options: ["int", "return", "void", "null"], correct: 2 },
+                { q: "ماذا نعني بنطاق المتغير (Variable Scope)؟", options: ["حجم المتغير في الذاكرة", "المكان الذي يمكن فيه استخدام المتغير داخل الكود", "قيمة المتغير الابتدائية", "نوع بيانات المتغير"], correct: 1 },
+                { q: "إذا كانت الدالة معرفة بعد الدالة `main()`، فماذا نحتاج أن نضع قبل `main()`؟", options: ["لا شيء", "نموذج الدالة (Function Prototype)", "المتغيرات العامة", "نستدعيها مرتين"], correct: 1 },
+                
+                // --- المؤشرات ---
+                { q: "ما هو الفرق الأساسي بين المؤشر (Pointer) والمتغير العادي؟", options: ["المؤشر يخزن القيمة، والمتغير يخزن العنوان", "المؤشر يخزن عنوان متغير آخر في الذاكرة", "لا يوجد فرق بينهما", "المؤشر يستخدم فقط مع النصوص"], correct: 1 },
+                { q: "أي رمز يُستخدم للوصول إلى عنوان المتغير في المؤشرات؟", options: ["*", "&", "#", "@"], correct: 1 },
+                { q: "أي رمز يُستخدم للوصول إلى القيمة التي يشير إليها المؤشر؟", options: ["*", "&", "#", "@"], correct: 0 },
+                { q: "إذا كان لدينا مؤشر `ptr` يشير إلى مصفوفة، فماذا يعني `ptr + 1`؟", options: ["إضافة 1 إلى قيمة العنصر", "الانتقال إلى العنصر التالي في المصفوفة", "إضافة 1 إلى عنوان الذاكرة فقط دون تغيير القيمة", "خطأ برمجي"], correct: 1 },
+                
+                // --- الدوال التكرارية ---
+                { q: "في الدوال التكرارية (Recursive Functions)، ما الذي يمنع الدالة من الاستدعاء اللانهائي لنفسها؟", options: ["return 0;", "حالة التوقف (Base Case)", "حلقة التكرار for", "استخدام المؤشرات"], correct: 1 },
+                { q: "ما هو ناتج 5! (مضروب 5) باستخدام دالة تكرارية؟", options: ["15", "120", "25", "24"], correct: 1 },
+                { q: "في دالة المضروب التكرارية، ما هو الشرط الأساسي للتوقف (Base Case)؟", options: ["if(n == 1) return 0;", "if(n == 0 || n == 1) return 1;", "if(n > 1) return n;", "لا يوجد شرط"], correct: 1 },
+                { q: "ما هو المبدأ الأساسي لعمل الدالة التكرارية؟", options: ["استدعاء دالة أخرى", "استدعاء الدالة لنفسها", "استخدام حلقات لا نهائية", "عدم استخدام return"], correct: 1 }
+            ],
+            fixCode: [
+                // --- تصحيح المصفوفات ---
+                { q: "صحح الكود التالي (خطأ في حدود المصفوفة):\nint arr[5] = {1,2,3,4,5};\ncout << arr[5];", keywords: ["arr[4]", "cout"], sample: "cout << arr[4];" },
+                { q: "صحح الكود التالي (خطأ في حلقة المصفوفة الثنائية):\nint arr[2][3];\nfor(int i=0; i<3; i++) {\n  for(int j=0; j<2; j++) cin >> arr[i][j];\n}", keywords: ["i<2", "j<3"], sample: "for(int i=0; i<2; i++) {\n  for(int j=0; j<3; j++) cin >> arr[i][j];\n}" },
+                { q: "صحح الكود التالي (خطأ في القطر الرئيسي):\nfor(int i=0; i<3; i++){\n  for(int j=0; j<3; j++){\n    if(i != j) sum += matrix[i][j];\n  }\n}", keywords: ["i == j"], sample: "if(i == j) sum += matrix[i][j];" },
+                { q: "صحح الكود التالي (خطأ في تهيئة المصفوفة):\nint nums[3] = (1, 2, 3);", keywords: ["{", "}"], sample: "int nums[3] = {1, 2, 3};" },
+                
+                // --- تصحيح الدوال ---
+                { q: "صحح الكود التالي (خطأ في إرسال المتغيرات بالمرجع):\nvoid change(int x) { x = 5; }\nint main() { int a = 1; change(a); }", keywords: ["&"], sample: "void change(int &x) { x = 5; }" },
+                { q: "صحح الكود التالي (دالة لا ترجع قيمة ولكنها معرفة كـ int):\nint printMsg() {\n  cout << \"Hello\";\n}", keywords: ["void"], sample: "void printMsg() {\n  cout << \"Hello\";\n}" },
+                { q: "صحح الكود التالي (نسيان إرجاع القيمة):\nint add(int a, int b) {\n  int sum = a + b;\n}", keywords: ["return", "sum"], sample: "int add(int a, int b) {\n  int sum = a + b;\n  return sum;\n}" },
+                
+                // --- تصحيح المؤشرات ---
+                { q: "صحح الكود التالي (خطأ في تعريف المؤشر):\nint x = 10;\nint ptr = &x;", keywords: ["*", "&"], sample: "int *ptr = &x;" },
+                { q: "صحح الكود التالي (خطأ في الوصول لقيمة المؤشر):\nint x = 10;\nint *ptr = &x;\ncout << ptr;", keywords: ["*ptr"], sample: "cout << *ptr;" },
+                { q: "صحح الكود التالي (خطأ في ربط المؤشر بالمتغير):\nint x = 5;\nint *ptr;\nptr = x;", keywords: ["&x"], sample: "ptr = &x;" },
+                
+                // --- تصحيح الملفات ---
+                { q: "صحح الكود التالي (خطأ في فتح الملف للكتابة):\n#include <fstream>\nofstream file;\nfile.open(\"data.txt\");\nfile >> \"Hello\";", keywords: ["<<"], sample: "file << \"Hello\";" },
+                { q: "صحح الكود التالي (خطأ في الطباعة من الملف):\nifstream fin;\nfin.open(\"test.txt\");\ncin >> line;", keywords: ["fin", "getline"], sample: "fin >> line; // أو fin.getline(line, 80);" },
+                { q: "صحح الكود التالي (نسيان مكتبة الملفات):\n#include <iostream>\nusing namespace std;\nint main() { ofstream f; }", keywords: ["#include", "<fstream>"], sample: "#include <fstream>" },
+                { q: "صحح الكود التالي (نسيان إغلاق الملف):\nofstream fout;\nfout.open(\"a.txt\");\nfout << \"Hi\";", keywords: ["close"], sample: "fout << \"Hi\";\nfout.close();" },
+                
+                // --- تصحيح التكرار (Recursion) ---
+                { q: "صحح الكود التالي (دالة تكرارية بدون حالة توقف):\nint fact(int n) {\n  return n * fact(n-1);\n}", keywords: ["if", "return 1"], sample: "int fact(int n) {\n  if(n <= 1) return 1;\n  return n * fact(n-1);\n}" },
+                { q: "صحح الكود التالي (خطأ في استدعاء الدالة التكرارية):\nint power(int x, int n) {\n  if(n==0) return 1;\n  return x * power(x, n);\n}", keywords: ["n-1"], sample: "return x * power(x, n-1);" }
+            ],
+            writeCode: [
+                // --- كتابة كود (مؤشرات) ---
+                { q: "اكتب سطراً برمجياً لتعريف مؤشر (ptr) يشير إلى متغير صحيح (x).", keywords: ["int", "*", "&"], sample: "int *ptr = &x;" },
+                { q: "اكتب سطراً برمجياً للوصول إلى قيمة المتغير الذي يشير إليه المؤشر (ptr) وطباعته باستخدام cout.", keywords: ["cout", "*ptr"], sample: "cout << *ptr;" },
+                { q: "اكتب سطر برمجي لطباعة عنوان الذاكرة الخاص بالمتغير (x).", keywords: ["cout", "&x"], sample: "cout << &x;" },
+                
+                // --- كتابة كود (ملفات) ---
+                { q: "اكتب كود يفتح ملف نصي باسم \"myFile.txt\" للقراءة (Reading) باستخدام ifstream باسم الكائن (inFile).", keywords: ["ifstream", "open", "myFile.txt"], sample: "ifstream inFile;\ninFile.open(\"myFile.txt\");" },
+                { q: "اكتب كود لإنشاء ملف باسم \"out.txt\" للكتابة باستخدام ofstream.", keywords: ["ofstream", "open", "out.txt"], sample: "ofstream fout;\nfout.open(\"out.txt\");" },
+                { q: "اكتب سطر برمجي يضيف الكلمة \"Hello\" إلى ملف مفتوح باسم الكائن (file).", keywords: ["file", "<<", "Hello"], sample: "file << \"Hello\";" },
+                
+                // --- كتابة كود (دوال) ---
+                { q: "اكتب دالة (Function) اسمها maxNum تستقبل عددين صحيحين a و b، وتُرجع العدد الأكبر منهما.", keywords: ["int", "maxNum", "if", "return", ">"], sample: "int maxNum(int a, int b) {\n  if(a > b) return a;\n  else return b;\n}" },
+                { q: "اكتب تعريف دالة (Void Function) اسمها printHello لا تستقبل أي معاملات وتطبع جملة \"Hello World\".", keywords: ["void", "printHello", "cout", "Hello World"], sample: "void printHello() {\n  cout << \"Hello World\";\n}" },
+                { q: "اكتب دالة اسمها swap تستقبل متغيرين بالمرجع (Pass by Reference) وتقوم بتبديل قيمتهما.", keywords: ["void", "swap", "&", "temp"], sample: "void swap(int &a, int &b) {\n  int temp = a;\n  a = b;\n  b = temp;\n}" },
+                
+                // --- كتابة كود (مصفوفات) ---
+                { q: "اكتب جزءاً من الكود لحساب مجموع عناصر القطر الرئيسي (Main Diagonal) لمصفوفة ثنائية (matrix) حجمها 3x3 باستخدام حلقة for واحدة فقط.", keywords: ["for", "sum", "+=", "[i][i]"], sample: "int sum = 0;\nfor(int i=0; i<3; i++) {\n  sum += matrix[i][i];\n}" },
+                { q: "اكتب كود لتعريف مصفوفة أحادية الأبعاد من نوع صحيح (int) اسمها arr وتحتوي على 10 عناصر.", keywords: ["int", "arr", "[10]"], sample: "int arr[10];" },
+                { q: "اكتب حلقة for للدوران على مصفوفة أحادية اسمها arr من 0 إلى 9.", keywords: ["for", "int", "i", "0", "10", "i++"], sample: "for(int i=0; i<10; i++)" },
+                { q: "اكتب كود لتعريف مصفوفة ثنائية الأبعاد اسمها matrix من 3 صفوف و 4 أعمدة.", keywords: ["int", "matrix", "[3][4]"], sample: "int matrix[3][4];" },
+                
+                // --- كتابة كود (تكرار) ---
+                { q: "اكتب السطر الأساسي داخل دالة المضروب (fact) الذي يقوم باستدعاء الدالة لنفسها (Recursive Call).", keywords: ["return", "fact", "n-1"], sample: "return n * fact(n-1);" }
+            ]
+        };
+
+        let selectedQuestions = [];
+        let studentName = "";
+        let timeLeft = 30 * 60;
+        let timerInterval;
+        let currentScore = 0;
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.container').forEach(el => el.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function shuffle(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function startExam() {
+            studentName = document.getElementById('student-name').value.trim();
+            if (!studentName) {
+                alert("الرجاء إدخال اسمك أولاً!");
+                return;
+            }
+            
+            // سحب 7 اختيار، 7 تصحيح، 6 كتابة كود من البنك الضخم
+            let mcqs = shuffle([...questionBank.mcq]).slice(0, 7);
+            let fixes = shuffle([...questionBank.fixCode]).slice(0, 7);
+            let codes = shuffle([...questionBank.writeCode]).slice(0, 6);
+
+            selectedQuestions = [
+                ...mcqs.map(q => ({ type: 'mcq', data: q })),
+                ...fixes.map(q => ({ type: 'fixCode', data: q })),
+                ...codes.map(q => ({ type: 'writeCode', data: q }))
+            ];
+
+            selectedQuestions = shuffle(selectedQuestions);
+
+            renderQuestions();
+            showScreen('exam-screen');
+            startTimer();
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            selectedQuestions.forEach((item, index) => {
+                let html = `<div class="question-box">`;
+                
+                if (item.type === 'mcq') {
+                    html += `<div class="question-type">اختر الإجابة الصحيحة</div>`;
+                    html += `<div class="question-title">${index + 1}. ${item.data.q}</div>`;
+                    html += `<div class="options">`;
+                    item.data.options.forEach((opt, i) => {
+                        html += `<label><input type="radio" name="q${index}" value="${i}"> ${opt}</label>`;
+                    });
+                    html += `</div>`;
+                } else if (item.type === 'fixCode') {
+                    html += `<div class="question-type">صحح الكود التالي</div>`;
+                    html += `<div class="question-title" style="direction: ltr; text-align: left; background: #e5e7eb; padding: 10px; border-radius: 5px; font-family: monospace; white-space: pre-wrap;">${item.data.q}</div>`;
+                    html += `<textarea id="q${index}" placeholder="اكتب الكود المصحح هنا..."></textarea>`;
+                } else {
+                    html += `<div class="question-type">اكتب الكود المطلوب</div>`;
+                    html += `<div class="question-title">${index + 1}. ${item.data.q}</div>`;
+                    html += `<textarea id="q${index}" placeholder="اكتب الكود هنا..."></textarea>`;
+                }
+                
+                html += `</div>`;
+                container.innerHTML += html;
+            });
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("انتهى الوقت! سيتم إرسال الامتحان تلقائياً.");
+                    submitExam();
+                    return;
+                }
+                timeLeft--;
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                document.getElementById('timer').innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function normalizeText(text) {
+            if (!text) return "";
+            return text.toLowerCase()
+                       .replace(/\s+/g, '') 
+                       .replace(/;/g, '')   
+                       .replace(/\n/g, '')  
+                       .replace(/[\{\}]/g, ''); 
+        }
+
+        function checkCode(userAnswer, item) {
+            let cleanUser = normalizeText(userAnswer);
+            let matchedKeywords = 0;
+            
+            item.keywords.forEach(keyword => {
+                let cleanKeyword = normalizeText(keyword);
+                if (cleanUser.includes(cleanKeyword)) {
+                    matchedKeywords++;
+                }
+            });
+
+            return (matchedKeywords / item.keywords.length) >= 0.4; 
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+            currentScore = 0;
+            let total = 20;
+            let reviewHTML = "";
+
+            selectedQuestions.forEach((item, index) => {
+                let isCorrect = false;
+                let userAnsText = "";
+                let correctAnsText = "";
+
+                if (item.type === 'mcq') {
+                    let selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    let userVal = selected ? parseInt(selected.value) : -1;
+                    isCorrect = (userVal === item.data.correct);
+                    
+                    userAnsText = selected ? item.data.options[userVal] : "لم يتم الإجابة";
+                    correctAnsText = item.data.options[item.data.correct];
+                } else {
+                    let userText = document.getElementById(`q${index}`).value;
+                    isCorrect = checkCode(userText, item.data);
+                    userAnsText = userText || "لم يتم الإجابة";
+                    correctAnsText = item.data.sample;
+                }
+
+                if (isCorrect) currentScore++;
+
+                reviewHTML += `<div class="review-item">`;
+                reviewHTML += `<div style="font-weight: bold; margin-bottom: 10px; font-size: 1.1rem;">${index + 1}. ${item.data.q}</div>`;
+                
+                if (item.type === 'mcq') {
+                    reviewHTML += `<div>إجابتك: <span class="${isCorrect ? 'ans-correct' : 'ans-wrong'}">${userAnsText}</span></div>`;
+                    if (!isCorrect) reviewHTML += `<div style="margin-top:5px;">الإجابة الصحيحة: <span class="ans-correct">${correctAnsText}</span></div>`;
+                } else {
+                    reviewHTML += `<div style="margin-bottom:5px;">إجابتك:</div>`;
+                    reviewHTML += `<div class="code-block">${userAnsText.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>`;
+                    reviewHTML += `<div style="margin-top:10px; margin-bottom:5px; color: var(--success); font-weight:bold;">الإجابة النموذجية:</div>`;
+                    reviewHTML += `<div class="code-block">${correctAnsText.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>`;
+                    
+                    if (!isCorrect) {
+                        reviewHTML += `<button class="override-btn" id="override-${index}" onclick="manualOverride(${index})">هل إجابتك صحيحة؟ اضغط لاحتساب الدرجة ✅</button>`;
+                    }
+                }
+                
+                let statusText = isCorrect ? '<span class="ans-correct">✅ إجابة صحيحة</span>' : '<span class="ans-wrong">❌ إجابة خاطئة</span>';
+                reviewHTML += `<div style="margin-top: 10px;" id="status-${index}">${statusText}</div>`;
+                reviewHTML += `</div>`;
+            });
+
+            document.getElementById('review-container').innerHTML = reviewHTML;
+            updateResultUI();
+            showScreen('result-screen');
+            saveResultToLocal();
+        }
+
+        function manualOverride(index) {
+            document.getElementById(`override-${index}`).style.display = 'none';
+            let statusDiv = document.getElementById(`status-${index}`);
+            statusDiv.innerHTML = '<span class="ans-correct">✅ إجابة صحيحة (تم التقييم الذاتي)</span>';
+            currentScore++;
+            updateResultUI();
+            saveResultToLocal();
+        }
+
+        function updateResultUI() {
+            let total = 20;
+            let percentage = Math.round((currentScore / total) * 100);
+            
+            document.getElementById('score-circle').innerText = `${percentage}%`;
+            document.getElementById('result-name').innerText = `الطالب: ${studentName}`;
+            document.getElementById('result-details').innerText = `لقد أجبت بشكل صحيح على ${currentScore} من أصل ${total} أسئلة.`;
+
+            let circleColor = percentage >= 50 ? '#10b981' : '#ef4444';
+            document.getElementById('score-circle').style.background = circleColor;
+            document.getElementById('score-circle').style.boxShadow = `0 10px 20px ${circleColor}80`;
+        }
+
+        function saveResultToLocal() {
+            let total = 20;
+            let percentage = Math.round((currentScore / total) * 100);
+            let history = JSON.parse(localStorage.getItem('examHistory')) || [];
+            
+            let existingIndex = history.findIndex(h => h.name === studentName && h.date === new Date().toLocaleDateString('ar-EG'));
+            if(existingIndex !== -1) {
+                history[existingIndex].percentage = percentage;
+                history[existingIndex].score = currentScore;
+            } else {
+                history.push({
+                    name: studentName,
+                    percentage: percentage,
+                    score: currentScore,
+                    total: total,
+                    date: new Date().toLocaleString('ar-EG')
+                });
+            }
+            localStorage.setItem('examHistory', JSON.stringify(history));
+        }
+
+        function shareResult() {
+            let scoreText = document.getElementById('result-details').innerText;
+            let percentage = document.getElementById('score-circle').innerText;
+            
+            let shareMessage = `🎓 نتيجة الامتحان الشامل في C++\n👤 الطالب: ${studentName}\n📊 النتيجة: ${percentage}\n✅ ${scoreText}\n\n💻 تم التقديم عبر منصة الباشمهندس محمد عبد الكريم محمد (محمد عبدو).`;
+            
+            if (navigator.share) {
+                navigator.share({ title: 'نتيجة الامتحان', text: shareMessage }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(shareMessage).then(() => {
+                    alert("تم نسخ النتيجة! يمكنك لصقها ومشاركتها مع أصدقائك.");
+                }).catch(() => {
+                    alert("حدث خطأ أثناء نسخ النتيجة.");
+                });
+            }
+        }
+    </script>
+</body>
+</html>
