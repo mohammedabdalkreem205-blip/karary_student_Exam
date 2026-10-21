@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <!-- ===== الأمان ===== -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- ===== الهوية ===== -->
+  <title>منصة امتحانات الباش مهندس محمد عبد الكريم</title>
+  <meta name="description" content="تدرّب على امتحاناتك بأسئلة اختيار من متعدد وصح وخطأ، مع مؤقت ونتيجة فورية ومراجعة للأخطاء.">
+  <meta name="theme-color" content="#0b6e6e" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+
+  <!-- ===== PWA ===== -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="امتحانات الباش مهندس">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
+  <!-- ===== مشاركة ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="منصة امتحانات الباش مهندس محمد عبد الكريم">
+  <meta property="og:description" content="تدرّب على امتحاناتك بأسئلة تفاعلية مع مؤقت ونتيجة فورية.">
+  <meta property="og:locale" content="ar_SA">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ===== الخطوط ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://iicsvudgycyloovrdgro.supabase.co" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ===== تحسينات داخلية ===== -->
+  <style>
+    :root{
+      --brand:#0b6e6e; --brand-2:#085656; --bg:#f8fafc; --card:#fff;
+      --ink:#0f172a; --muted:#64748b; --line:#e2e8f0; --mark:#f59e0b;
+      --danger:#dc2626; --success:#16a34a; --radius-sm:8px; --radius:14px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --brand:#14b8a6; --brand-2:#0d9488; --bg:#0f172a; --card:#1e293b;
+        --ink:#f1f5f9; --muted:#94a3b8; --line:#334155;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{font-family:'IBM Plex Sans Arabic',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+    .screen{padding:16px;max-width:900px;margin:0 auto}
+    .screen.wide{max-width:1200px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+    .brand{font-weight:700;color:var(--ink)}
+    .brand small{color:var(--muted);font-weight:400;margin-inline-start:8px;font-size:.85rem}
+    .icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:.15s}
+    .icon-btn:hover{background:color-mix(in oklab,var(--line),var(--card) 50%)}
+    
+    .skip-link{position:absolute;top:-48px;right:12px;background:var(--brand);color:#fff;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:700;z-index:9999;transition:top .2s}
+    .skip-link:focus{top:10px}
+
+    .hero{display:grid;gap:20px;grid-template-columns:1fr;margin:16px 0}
+    @media (min-width:768px){.hero{grid-template-columns:1.2fr 1fr;align-items:center}}
+    .hero h1{font-size:1.8rem;margin:0 0 10px;line-height:1.3}
+    .lead{color:var(--muted);margin:0;font-size:1.02rem}
+    .hero-code{background:#0f172a;color:#e2e8f0;padding:16px;border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:.85rem;direction:ltr;text-align:left;overflow:auto;margin:0}
+    .hero-code .k{color:#f472b6}
+    .hero-code .s{color:#86efac}
+
+    .field{display:grid;gap:6px;margin-bottom:14px}
+    .field label{font-weight:600;font-size:.9rem;color:var(--ink)}
+    .field input,.field select{padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card);color:var(--ink);font:inherit;transition:.15s}
+    .field input:focus,.field select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px color-mix(in oklab,var(--brand),transparent 80%)}
+    .field input:invalid:not(:placeholder-shown){border-color:var(--danger)}
+    .error{color:var(--danger);font-size:.82rem;margin-top:2px}
+
+    .btn{background:var(--brand);color:#fff;border:none;padding:11px 18px;border-radius:10px;cursor:pointer;font:inherit;font-weight:700;transition:.15s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+    .btn:hover:not(:disabled){background:var(--brand-2);transform:translateY(-1px)}
+    .btn:disabled{opacity:.55;cursor:not-allowed}
+    .btn.block{width:100%}
+    .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+    .btn.ghost:hover:not(:disabled){background:color-mix(in oklab,var(--line),var(--card) 50%)}
+    .btn.small{padding:5px 10px;font-size:.78rem}
+
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+    .chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-weight:600;font-size:.85rem;transition:.15s}
+    .chip[aria-pressed="true"]{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+    .notice{background:color-mix(in oklab,var(--mark),var(--card) 85%);border:1px solid var(--mark);border-radius:var(--radius);padding:14px;display:grid;gap:8px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+
+    .modes{display:grid;gap:14px;grid-template-columns:1fr;margin:16px 0}
+    @media (min-width:700px){.modes{grid-template-columns:1fr 1fr}}
+
+    .exam-head{position:sticky;top:58px;z-index:10;background:var(--bg);padding:10px 0}
+    .bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .counter{color:var(--muted);font-weight:600}
+    .timer{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.2rem;padding:4px 12px;border-radius:999px;background:var(--card);border:1px solid var(--line);transition:color .3s}
+    .timer[data-state="warning"]{color:#f59e0b}
+    .timer[data-state="danger"]{color:var(--danger);animation:pulse 1s infinite}
+    @keyframes pulse{50%{opacity:.55}}
+    .progress{height:6px;background:var(--line);border-radius:999px;overflow:hidden}
+    #progress-fill{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),#22c55e);transition:width .35s}
+
+    .exam-grid{display:grid;gap:14px;grid-template-columns:1fr}
+    @media (min-width:900px){.exam-grid{grid-template-columns:1fr 280px}}
+    .navigator-card{position:sticky;top:130px;height:fit-content}
+    .nav-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;margin:10px 0}
+    .nav-grid button{min-width:36px;min-height:36px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:700;cursor:pointer;transition:.15s;position:relative}
+    .nav-grid button:hover{border-color:var(--brand)}
+    .nav-grid button[aria-current="true"]{outline:2px solid var(--brand);outline-offset:2px}
+    .nav-grid button.answered{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .nav-grid button.marked::after{content:"•";position:absolute;top:-6px;right:-4px;color:var(--mark);font-size:1.4em;line-height:1}
+    .legend{display:flex;gap:14px;font-size:.8rem;color:var(--muted);margin-top:8px}
+    .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-inline-end:6px;vertical-align:middle}
+
+    .score-card{text-align:center}
+    .ring{width:150px;height:150px;margin:0 auto;border-radius:50%;background:conic-gradient(var(--brand) 0%,var(--line) 0%);display:grid;place-items:center;position:relative}
+    .ring::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--card)}
+    #ring-text{position:relative;font-size:1.6rem;font-weight:700;color:var(--brand)}
+    .verdict{font-size:1.2rem;font-weight:700;margin:10px 0}
+    .result-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+    .review-tabs{display:flex;gap:8px;justify-content:center;margin:16px 0}
+
+    dialog{border:none;border-radius:16px;padding:24px;max-width:440px;width:calc(100% - 32px);background:var(--card);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+    dialog::backdrop{background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+    
+    .toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,200%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:9999;transition:transform .35s cubic-bezier(.4,0,.2,1);max-width:calc(100% - 32px);text-align:center}
+    .toast:not([hidden]){transform:translate(-50%,0)}
+
+    .skeleton{background:linear-gradient(90deg,var(--line) 25%,color-mix(in oklab,var(--line),var(--card) 50%) 50%,var(--line) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:8px;height:1em}
+    @keyframes shimmer{to{background-position:-200% 0}}
+
+    .certificate{display:none;text-align:center;padding:32px;border:2px solid var(--brand);border-radius:16px;background:#fff;color:#111;margin:20px auto;max-width:700px}
+    .cert-name{font-size:1.8rem;font-weight:700;margin:16px 0;padding:12px;border-block:1px solid #ccc}
+
+    .history header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+
+    :focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+
+    @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+
+    @media print{
+      .topbar,.skip-link,.toast,dialog,.screen:not(#result-screen),.result-actions,.review-tabs,#review-container{display:none !important}
+      .certificate{display:block !important}
+      body{background:#fff;color:#000}
+      .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid}
+    }
+
+    @media (max-width:640px){
+      .screen{padding:12px}
+      .hero h1{font-size:1.4rem}
+      .nav-grid{grid-template-columns:repeat(auto-fill,minmax(34px,1fr))}
+      #finish-btn{position:sticky;bottom:12px}
+    }
+
+    .offline-banner{position:fixed;bottom:0;left:0;right:0;background:#f59e0b;color:#111;text-align:center;padding:8px;font-weight:700;font-size:.85rem;z-index:9000;transform:translateY(100%);transition:transform .3s}
+    .offline-banner.show{transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+  <header class="topbar">
+    <div class="brand">الباش مهندس محمد عبد الكريم <small>منصة الامتحانات</small></div>
+    <button class="icon-btn" id="theme-btn" type="button"
+            aria-label="تبديل الوضع الداكن" aria-pressed="false" title="تبديل الوضع الداكن">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/>
+      </svg>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- ============ الرئيسية ============ -->
+    <section id="home-screen" class="screen" aria-labelledby="home-title">
+      <div class="hero">
+        <div>
+          <h1 id="home-title">تدرّب وامتحن في موادك الدراسية</h1>
+          <p class="lead">منصة تعليمية لمساعدة الطلاب على التدريب. أسئلة عشوائية، ومؤقت، ونتيجة فورية، ومراجعة لأخطائك.</p>
+        </div>
+<pre class="hero-code" aria-hidden="true" dir="ltr"><code><span class="k">#include</span> &lt;iostream&gt;
+<span class="k">using namespace</span> std;
+
+<span class="k">int</span> main() {
+  cout &lt;&lt; <span class="s">"موفقين إن شاء الله"</span>;
+}</code></pre>
+      </div>
+
+      <div id="resume-box" class="notice" hidden role="status">
+        <strong>لديك امتحان لم تنهِه.</strong>
+        <span id="resume-info"></span>
+        <div class="row">
+          <button class="btn" id="resume-btn" type="button">أكمل الامتحان</button>
+          <button class="btn ghost" id="discard-btn" type="button">احذفه وابدأ من جديد</button>
+        </div>
+      </div>
+
+      <!-- قسم التسجيل -->
+      <div class="card" style="margin-top:20px">
+        <div class="field" style="margin-bottom:20px">
+          <label for="subject-select" style="color:var(--brand);font-weight:700;font-size:1.05rem">المادة الدراسية</label>
+          <select id="subject-select" required aria-required="true" style="border:2px solid var(--brand);font-weight:700">
+            <option value="">جارٍ تحميل المواد...</option>
+          </select>
+          <div class="error" id="subject-error" role="alert" hidden>اختر مادة أولاً.</div>
+        </div>
+
+        <div class="field">
+          <label for="student-name">اسمك الثلاثي</label>
+          <input type="text" id="student-name" placeholder="اكتب اسمك الثلاثي" autocomplete="name" maxlength="60" required aria-required="true" enterkeyhint="next">
+          <div class="error" id="name-error" role="alert" hidden>اكتب اسمك أولاً لنبدأ.</div>
+        </div>
+
+        <div class="field">
+          <label for="university-id">الرقم الجامعي</label>
+          <input type="text" id="university-id" placeholder="أدخل رقمك الجامعي" autocomplete="off" inputmode="numeric" pattern="[0-9]{4,15}" minlength="4" maxlength="15" required aria-required="true" enterkeyhint="done">
+          <div class="error" id="id-error" role="alert" hidden>أدخل رقماً جامعياً صحيحاً (4 إلى 15 رقماً).</div>
+        </div>
+
+        <div class="field">
+          <label for="department">القسم</label>
+          <select id="department">
+            <option value="cs">علوم حاسوب</option>
+            <option value="it">تقنية معلومات</option>
+            <option value="networks">شبكات</option>
+            <option value="se">هندسة برمجيات</option>
+            <option value="is">نظم معلومات</option>
+            <option value="security">أمن معلومات</option>
+            <option value="rks">شبكات (rks)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="modes">
+        <div class="card mode">
+          <h3>امتحان شامل</h3>
+          <p id="exam-desc">20 سؤالاً عشوائياً من المادة المختارة. المدة 30 دقيقة.</p>
+          <button class="btn block" id="start-exam" type="button" aria-describedby="exam-desc">ابدأ الامتحان</button>
+        </div>
+        <div class="card mode">
+          <h3>تدريب حسب الموضوع</h3>
+          <p>بدون مؤقت، 10 أسئلة من الموضوع الذي تختاره.</p>
+          <div class="chips" id="topic-chips" role="group" aria-label="اختر الموضوع"></div>
+          <button class="btn block ghost" id="start-practice" type="button">ابدأ التدريب</button>
+        </div>
+      </div>
+
+      <p class="privacy" id="privacy-note">اسمك ونتائجك تُحفظ في قاعدة بيانات المنصة لمتابعة تقدمك.</p>
+
+      <div class="history" id="history" hidden>
+        <header>
+          <h3>آخر نتائجك</h3>
+          <button class="btn ghost small" id="clear-history" type="button">مسح</button>
+        </header>
+        <ul id="history-list"></ul>
+      </div>
+
+      <p class="site-footer">يمكنك تثبيت الموقع على هاتفك من قائمة المتصفح (إضافة إلى الشاشة الرئيسية).</p>
+    </section>
+
+    <!-- ============ الامتحان ============ -->
+    <section id="exam-screen" class="screen wide" hidden aria-label="الامتحان">
+      <div class="exam-head">
+        <div class="bar">
+          <span class="counter" id="counter" aria-live="polite"></span>
+          <span class="timer" id="timer" role="timer" aria-live="off" aria-label="الوقت المتبقي">30:00</span>
+        </div>
+        <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="تقدم الامتحان">
+          <i id="progress-fill"></i>
+        </div>
+      </div>
+
+      <div class="exam-grid">
+        <div class="card" id="question-card" aria-live="polite"></div>
+        <aside class="card navigator-card" aria-label="قائمة الأسئلة">
+          <h3>الأسئلة</h3>
+          <div class="nav-grid" id="nav-grid" role="group" aria-label="التنقل بين الأسئلة"></div>
+          <div class="legend" aria-hidden="true">
+            <span><i style="background:var(--brand)"></i>أُجيب عنه</span>
+            <span><i style="background:var(--mark)"></i>للمراجعة</span>
+          </div>
+          <button class="btn block" id="finish-btn" type="button" style="margin-top:16px">إنهاء الامتحان</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ النتيجة ============ -->
+    <section id="result-screen" class="screen" hidden aria-label="النتيجة">
+      <div class="card score-card">
+        <div class="ring" id="ring" role="img" aria-label="النسبة المئوية للنتيجة">
+          <div id="ring-text" aria-hidden="true">0%</div>
+        </div>
+        <div class="verdict" id="verdict" aria-live="polite"></div>
+        <h2 id="result-name"></h2>
+        <div class="stats" id="result-stats"></div>
+        <div class="topic-bars" id="topic-bars"></div>
+        <div class="result-actions">
+          <button class="btn" id="share-btn" type="button">مشاركة النتيجة</button>
+          <button class="btn ghost" id="cert-btn" type="button" hidden>طباعة الشهادة</button>
+          <button class="btn ghost" id="retry-btn" type="button">امتحان جديد</button>
+          <button class="btn ghost" id="home-btn" type="button">الصفحة الرئيسية</button>
+        </div>
+      </div>
+
+      <div class="review-tabs" role="group" aria-label="تصفية المراجعة">
+        <button class="chip" type="button" data-filter="all" aria-pressed="true">كل الأسئلة</button>
+        <button class="chip" type="button" data-filter="wrong" aria-pressed="false">الأخطاء فقط</button>
+      </div>
+      <div class="card" id="review-container"></div>
+    </section>
+  </main>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+    <h3 id="confirm-title">إنهاء الامتحان؟</h3>
+    <p id="confirm-text"></p>
+    <div class="row">
+      <button class="btn" id="confirm-yes" type="button">نعم، أنهِ الآن</button>
+      <button class="btn ghost" id="confirm-no" type="button" autofocus>العودة للأسئلة</button>
+    </div>
+  </dialog>
+
+  <div class="certificate" id="certificate" aria-hidden="true">
+    <h2>شهادة اجتياز تدريب</h2>
+    <p>تشهد منصة امتحانات الباش مهندس محمد عبد الكريم بأن الطالب</p>
+    <div class="cert-name" id="cert-name"></div>
+    <p class="cert-score" id="cert-score"></p>
+    <small id="cert-date" dir="ltr"></small>
+    <small>إعداد م. محمد عبدالكريم محمد (محمد عبدو)</small>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <div class="offline-banner" id="offline-banner">أنت غير متصل بالإنترنت. سيتم حفظ إجاباتك محلياً.</div>
+
+  <noscript>
+    <div style="position:fixed;inset:0;background:#fff;color:#111;padding:2rem;text-align:center;z-index:9999;font-family:system-ui">
+      <h2>يتطلب هذا الموقع JavaScript</h2>
+      <p>يرجى تمكين JavaScript في متصفحك لتشغيل الامتحانات.</p>
+    </div>
+  </noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="app.js?v=10" defer></script>
+</body>
+</html>
