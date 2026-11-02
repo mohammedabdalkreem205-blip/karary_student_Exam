@@ -1,5 +1,5 @@
 // خدمة العمل دون اتصال. ارفع رقم الإصدار عند تغيير ملفات الموقع ليتحدّث الكاش.
-const CACHE = 'cpp-exam-v11';
+const CACHE = 'cpp-exam-v12';
 const SHELL = ['./', 'index.html', 'style.css', 'app.js', 'manifest.json', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {
