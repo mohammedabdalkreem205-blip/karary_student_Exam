@@ -528,6 +528,8 @@ function bindEvents() {
 // كود التحديث التلقائي الصامت
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   navigator.serviceWorker.register('sw.js').then((reg) => {
+    reg.update(); // إجبار المتصفح على البحث عن تحديثات
+    
     reg.onupdatefound = () => {
       const installingWorker = reg.installing;
       if (installingWorker) {
@@ -542,7 +544,7 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   }).catch(() => {});
 }
 
-// تشغيل المنصة (هذا الجزء مهم جداً ولا يجب حذفه)
+// تشغيل المنصة
 async function init() {
   initTheme(); bindEvents();
   renderHome();
