@@ -525,10 +525,27 @@ function bindEvents() {
   }
 }
 
+// كود التحديث التلقائي الصامت
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').then((reg) => {
+    reg.onupdatefound = () => {
+      const installingWorker = reg.installing;
+      if (installingWorker) {
+        installingWorker.onstatechange = () => {
+          if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            // تم تحميل تحديث جديد، قم بتحديث الصفحة فوراً
+            window.location.reload();
+          }
+        };
+      }
+    };
+  }).catch(() => {});
+}
+
+// تشغيل المنصة (هذا الجزء مهم جداً ولا يجب حذفه)
 async function init() {
   initTheme(); bindEvents();
   renderHome();
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) { navigator.serviceWorker.register('sw.js').catch(() => {}); }
 }
 
 init();

@@ -351,7 +351,42 @@
     </div>
   </noscript>
 
+  <!-- ===== النوافذ المنبثقة (عن المنصة والدعم) ===== -->
+  <dialog id="about-modal">
+    <h3>عن المنصة</h3>
+    <p><strong>منصة الباش مهندس محمد عبدالكريم محمد الإمام</strong><br>منصة تعليمية تفاعلية مخصصة لطلاب جامعة كرري. تهدف إلى مساعدتك على الاستعداد لامتحاناتك من خلال بيئة امتحان حقيقية، بنك أسئلة ضخم، تصحيح فوري، ومراجعة شاملة. تتميز المنصة بسرعة فائقة وتصميم عصري يدعم العمل حتى مع ضعف الاتصال.</p>
+    <button class="btn block" onclick="document.getElementById('about-modal').close()">إغلاق</button>
+  </dialog>
+
+  <dialog id="support-modal">
+    <h3>الدعم الفني</h3>
+    <p>هل واجهتك مشكلة تقنية؟ هل لديك اقتراح لتطوير المنصة؟<br>تواصل معنا مباشرة:</p>
+    <div class="row" style="margin-bottom: 20px;">
+      <a href="https://wa.me/249923208354" target="_blank" class="btn gold" style="text-decoration: none;">واتساب</a>
+      <a href="https://www.facebook.com/mohammedAbdalkreemMa" target="_blank" class="btn" style="text-decoration: none; background: #1877F2;">فيسبوك</a>
+    </div>
+    <button class="btn ghost block" onclick="document.getElementById('support-modal').close()">إغلاق</button>
+  </dialog>
+
+  <!-- تحديث الفوتر وإضافة الأزرار -->
+  <script>
+    // إضافة أزرار الفوتر ديناميكياً
+    document.addEventListener('DOMContentLoaded', () => {
+      const footer = document.querySelector('.site-footer');
+      if (footer) {
+        footer.innerHTML = `
+          <div class="footer-links">
+            <button onclick="document.getElementById('about-modal').showModal()">عن المنصة</button>
+            <button onclick="document.getElementById('support-modal').showModal()">الدعم الفني</button>
+          </div>
+          <small>يمكنك تثبيت الموقع على هاتفك من قائمة المتصفح (إضافة إلى الشاشة الرئيسية).</small>
+          <small style="margin-top:8px;">© ${new Date().getFullYear()} جميع الحقوق محفوظة للباش مهندس محمد عبدالكريم محمد الإمام</small>
+        `;
+      }
+    });
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-  <script src="app.js?v=13" defer></script>
+  <script src="app.js?v=14" defer></script>
 </body>
 </html>
