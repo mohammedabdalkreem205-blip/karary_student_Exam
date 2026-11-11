@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'">
+  <title>منصة امتحانات الباش مهندس محمد عبدالكريم - جامعة كرري</title>
+  
+  <!-- ===== كود التحقق من جوجل ===== -->
+  <meta name="google-site-verification" content="_Z8k66PFc0pCssKxT87slsvXzZLv9OvCl4q4ziH8F-U" />
+
+  <!-- ===== كود السيو ليظهر اسمك في جوجل ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "محمد عبدالكريم محمد الإمام",
+    "alternateName": "الباش مهندس محمد عبدالكريم",
+    "jobTitle": "Full-Stack Web Developer",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "جامعة كرري - كلية علوم الحاسوب وتقانة المعلومات"
+    },
+    "url": "https://mohammedabdalkreem205-blip.github.io/karary_student_Exam/",
+    "sameAs": [
+      "https://www.facebook.com/mohammedAbdalkreemMa"
+    ],
+    "description": "مطور ويب ومؤسس منصة امتحانات الباش مهندس محمد عبدالكريم لطلاب جامعة كرري."
+  }
+  </script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+  
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== الشريط العلوي ===== -->
+  <header class="topbar">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      جامعة كرري
+    </div>
+    <div class="nav-links">
+      <a onclick="showScreen('home-screen')">الرئيسية</a>
+      <a onclick="showScreen('exam-screen')">الامتحانات</a>
+      <a onclick="showScreen('result-screen')">النتائج</a>
+      <a onclick="document.getElementById('support-modal').showModal()">الدعم الفني</a>
+    </div>
+    <div class="user-area">
+      <button class="icon-btn" id="theme-btn" aria-label="الوضع الليلي">🌙</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- ===== الصفحة الرئيسية ===== -->
+    <section id="home-screen" class="screen">
+      
+      <!-- قسم البطل (Hero) -->
+      <div class="hero">
+        <div class="hero-text">
+          <h1>منصة امتحانات<br>جامعة كرري</h1>
+          <p>اختبر .. تعلم .. وحقق مستقبلك<br>منصة الباش مهندس محمد عبدالكريم محمد الإمام</p>
+        </div>
+        
+        <!-- بطاقة بدء الامتحان -->
+        <div class="start-card">
+          <h3>🎓 ابدأ الامتحان الآن</h3>
+          <div class="field">
+            <label>المادة الدراسية</label>
+            <select id="subject-select">
+              <option value="">جارٍ تحميل المواد...</option>
+            </select>
+            <div class="error" id="subject-error" hidden style="color:var(--danger); font-size:0.85rem; margin-top:4px;">اختر مادة أولاً.</div>
+          </div>
+          <div class="field">
+            <label>الاسم الثلاثي</label>
+            <input type="text" id="student-name" placeholder="اكتب اسمك الثلاثي" maxlength="60">
+            <div class="error" id="name-error" hidden style="color:var(--danger); font-size:0.85rem; margin-top:4px;">اكتب اسمك أولاً.</div>
+          </div>
+          <div class="field">
+            <label>الرقم الجامعي</label>
+            <input type="text" id="university-id" placeholder="أدخل رقمك الجامعي" maxlength="15">
+            <div class="error" id="id-error" hidden style="color:var(--danger); font-size:0.85rem; margin-top:4px;">أدخل رقماً صحيحاً.</div>
+          </div>
+          <div class="field">
+            <label>القسم</label>
+            <select id="department">
+              <option value="cs">علوم حاسوب</option>
+              <option value="it">تقنية معلومات</option>
+              <option value="networks">شبكات</option>
+              <option value="se">هندسة برمجيات</option>
+              <option value="is">نظم معلومات</option>
+              <option value="security">أمن معلومات</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="start-exam">▶ بدء الامتحان الشامل</button>
+        </div>
+      </div>
+
+      <!-- كروت الأقسام -->
+      <div class="action-cards">
+        <div class="action-card dark">
+          <div>
+            <h3>الامتحان الشامل</h3>
+            <p>أجب على جميع الأسئلة المختارة عشوائياً لمدة 30 دقيقة.</p>
+          </div>
+          <button class="btn btn-gold" id="start-exam-btn" onclick="document.getElementById('start-exam').click()">ابدأ الآن ▶</button>
+        </div>
+        <div class="action-card light">
+          <div>
+            <h3>المراجعة حسب الموضوع</h3>
+            <p>تدرب على موضوع محدد أو راجع أخطاءك السابقة.</p>
+          </div>
+          <div class="chips" id="topic-chips" style="margin-bottom:12px;"></div>
+          <button class="btn btn-ghost" id="start-practice" style="width:100%;">ابدأ التدريب ▶</button>
+        </div>
+      </div>
+
+      <!-- استئناف وسجل -->
+      <div id="resume-box" style="background:var(--gold); color:#111; padding:16px; border-radius:12px; margin-bottom:20px; display:none; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+        <strong>لديك امتحان لم تنهِه.</strong>
+        <span id="resume-info"></span>
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button class="btn btn-primary" id="resume-btn" style="padding:8px 16px; width:auto;">أكمل</button>
+          <button class="btn btn-ghost" id="discard-btn" style="padding:8px 16px; border-color:#111; color:#111;">حذف</button>
+        </div>
+      </div>
+
+      <div class="history" id="history" hidden>
+        <h3 style="margin-bottom:12px;">آخر نتائجك</h3>
+        <ul id="history-list" style="list-style:none; background:var(--card); border-radius:12px; border:1px solid var(--line); overflow:hidden;"></ul>
+      </div>
+
+    </section>
+
+    <!-- ===== شاشة الامتحان ===== -->
+    <section id="exam-screen" class="screen" hidden>
+      <div class="exam-header" style="flex-wrap: wrap; gap: 10px;">
+        <div style="flex:1;">
+          <div style="font-weight:700;" id="counter">سؤال 1 من 20</div>
+          <!-- شريط التقدم الذي يحتاجه app.js -->
+          <div class="progress" style="margin-top:8px; height:8px; background:var(--line); border-radius:99px; overflow:hidden;">
+            <i id="progress-fill" style="display:block; height:100%; background:var(--brand); width:0;"></i>
+          </div>
+        </div>
+        <div class="timer" id="timer">30:00</div>
+        <button class="btn btn-ghost" id="finish-btn" style="padding:8px 16px;">إنهاء الامتحان</button>
+      </div>
+
+      <div style="display:grid; gap:20px; grid-template-columns:1fr;">
+        <div class="q-card" id="question-card"></div>
+        <div class="q-card" style="padding:16px;">
+          <h3 style="margin-bottom:12px; font-size:1rem;">قائمة الأسئلة</h3>
+          <div class="nav-grid" id="nav-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(36px, 1fr)); gap:8px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== شاشة النتيجة ===== -->
+    <section id="result-screen" class="screen" hidden>
+      <div class="q-card" style="text-align:center;">
+        <div class="ring" id="ring" style="width:150px; height:150px; border-radius:50%; border:10px solid var(--line); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:2rem; font-weight:800;">
+          <div id="ring-text">0%</div>
+        </div>
+        <h2 class="verdict" id="verdict" style="margin-bottom:10px;">النتيجة</h2>
+        <h3 id="result-name" style="color:var(--muted); font-weight:normal; margin-bottom:20px;"></h3>
+        <div id="result-stats" style="margin-bottom:20px; font-size:1.1rem;"></div>
+        <div id="topic-bars" style="text-align:right; margin-bottom:20px;"></div>
+        
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+          <button class="btn btn-primary" id="share-btn" style="width:auto;">مشاركة النتيجة</button>
+          <button class="btn btn-gold" id="cert-btn" hidden>طباعة الشهادة</button>
+          <button class="btn btn-ghost" id="retry-btn">امتحان جديد</button>
+          <button class="btn btn-ghost" id="home-btn">الرئيسية</button>
+        </div>
+      </div>
+      
+      <div class="review-tabs" style="display:flex; gap:10px; margin:20px 0;">
+        <button class="chip" data-filter="all" style="flex:1;" aria-pressed="true">كل الأسئلة</button>
+        <button class="chip" data-filter="wrong" style="flex:1;" aria-pressed="false">الأخطاء فقط</button>
+      </div>
+      <div class="q-card" id="review-container"></div>
+    </section>
+
+  </div> <!-- نهاية الكونتينر -->
+
+  <!-- ===== الفوتر والنوافذ المنبثقة ===== -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <button onclick="document.getElementById('about-modal').showModal()">عن المنصة</button>
+      <button onclick="document.getElementById('support-modal').showModal()">الدعم الفني</button>
+    </div>
+    <p>© 2026 جميع الحقوق محفوظة للباش مهندس محمد عبدالكريم محمد الإمام</p>
+  </footer>
+
+  <dialog id="about-modal">
+    <h3>عن المنصة</h3>
+    <p style="text-align:center; color:var(--muted); line-height:1.8;">
+      <strong>منصة الباش مهندس محمد عبدالكريم محمد الإمام</strong><br>
+      منصة تعليمية تفاعلية مخصصة لطلاب جامعة كرري. تهدف إلى مساعدتك على الاستعداد لامتحاناتك من خلال بيئة امتحان حقيقية، بنك أسئلة ضخم، تصحيح فوري، ومراجعة شاملة.
+    </p>
+    <button class="btn btn-primary" onclick="document.getElementById('about-modal').close()">إغلاق</button>
+  </dialog>
+
+  <dialog id="support-modal">
+    <h3>الدعم الفني</h3>
+    <p style="text-align:center; color:var(--muted); margin-bottom:20px;">تواصل معنا مباشرة لأي مشكلة أو اقتراح:</p>
+    <div style="display:flex; gap:10px; flex-direction:column;">
+      <a href="https://wa.me/249923208354" target="_blank" class="btn btn-gold" style="text-decoration:none;">واتساب</a>
+      <a href="https://www.facebook.com/mohammedAbdalkreemMa" target="_blank" class="btn btn-primary" style="text-decoration:none; background:#1877F2;">فيسبوك</a>
+      <button class="btn btn-ghost" onclick="document.getElementById('support-modal').close()">إغلاق</button>
+    </div>
+  </dialog>
+
+  <!-- نافذة تأكيد إنهاء الامتحان (مطلوبة للكود) -->
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
+    <h3 id="confirm-title">إنهاء الامتحان؟</h3>
+    <p id="confirm-text"></p>
+    <div class="row">
+      <button class="btn btn-primary" id="confirm-yes" type="button" style="width:100%;">نعم، أنهِ الآن</button>
+      <button class="btn btn-ghost" id="confirm-no" type="button" style="width:100%; margin-top:10px;">العودة للأسئلة</button>
+    </div>
+  </dialog>
+
+  <!-- الشهادة (مطلوبة للكود) -->
+  <div class="certificate" id="certificate" aria-hidden="true" style="display:none;">
+    <h2>شهادة اجتياز تدريب</h2>
+    <p>تشهد منصة امتحانات الباش مهندس محمد عبدالكريم محمد الإمام بأن الطالب</p>
+    <div class="cert-name" id="cert-name"></div>
+    <p class="cert-score" id="cert-score"></p>
+    <small id="cert-date" dir="ltr"></small>
+    <small>إعداد م. محمد عبدالكريم محمد الإمام</small>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <div class="offline-banner" id="offline-banner" style="display:none; background:var(--danger); color:white; text-align:center; padding:8px; position:fixed; bottom:0; width:100%; z-index:9999;">أنت غير متصل بالإنترنت. سيتم حفظ إجاباتك محلياً.</div>
+
+  <!-- السكربتات الأصلية -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous" defer></script>
+  <script src="app.js?v=16" defer></script>
+</body>
+</html>
