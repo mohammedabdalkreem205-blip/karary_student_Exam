@@ -2,246 +2,89 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'">
-  <title>منصة امتحانات الباش مهندس محمد عبدالكريم - جامعة كرري</title>
-  
-  <!-- ===== كود التحقق من جوجل ===== -->
-  <meta name="google-site-verification" content="_Z8k66PFc0pCssKxT87slsvXzZLv9OvCl4q4ziH8F-U" />
-
-  <!-- ===== كود السيو ليظهر اسمك في جوجل ===== -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "محمد عبدالكريم محمد الإمام",
-    "alternateName": "الباش مهندس محمد عبدالكريم",
-    "jobTitle": "Full-Stack Web Developer",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "جامعة كرري - كلية علوم الحاسوب وتقانة المعلومات"
-    },
-    "url": "https://mohammedabdalkreem205-blip.github.io/karary_student_Exam/",
-    "sameAs": [
-      "https://www.facebook.com/mohammedAbdalkreemMa"
-    ],
-    "description": "مطور ويب ومؤسس منصة امتحانات الباش مهندس محمد عبدالكريم لطلاب جامعة كرري."
-  }
-  </script>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b3d2e">
+  <meta name="description" content="منصة أهل الحي للعثور على أصحاب الخدمات القريبين منك والتواصل معهم مباشرة.">
+  <title>أهل الحي | خدمات قريبة منك</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
-  
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="services.css">
 </head>
-<body>
-
-  <!-- ===== الشريط العلوي ===== -->
-  <header class="topbar">
-    <div class="logo">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-      جامعة كرري
-    </div>
-    <div class="nav-links">
-      <a onclick="showScreen('home-screen')">الرئيسية</a>
-      <a onclick="showScreen('exam-screen')">الامتحانات</a>
-      <a onclick="showScreen('result-screen')">النتائج</a>
-      <a onclick="document.getElementById('support-modal').showModal()">الدعم الفني</a>
-    </div>
-    <div class="user-area">
-      <button class="icon-btn" id="theme-btn" aria-label="الوضع الليلي">🌙</button>
-    </div>
+<body class="marketplace">
+  <header class="market-header">
+    <a class="market-logo" href="#home" aria-label="أهل الحي - الرئيسية"><span class="logo-mark">أ</span><span>أهل الحي<small>خدمات موثوقة حولك</small></span></a>
+    <nav class="market-nav" aria-label="التنقل الرئيسي">
+      <a href="#home">الرئيسية</a><a href="#providers">تصفح الخدمات</a>
+      <button class="nav-link" id="open-register-provider">أضف خدمتك</button>
+    </nav>
+    <div class="account-actions"><span id="user-greeting" class="user-greeting" hidden></span><button class="btn btn-outline" id="auth-button">دخول / حساب جديد</button></div>
   </header>
 
-  <div class="container">
-    <!-- ===== الصفحة الرئيسية ===== -->
-    <section id="home-screen" class="screen">
-      
-      <!-- قسم البطل (Hero) -->
-      <div class="hero">
-        <div class="hero-text">
-          <h1>منصة امتحانات<br>جامعة كرري</h1>
-          <p>اختبر .. تعلم .. وحقق مستقبلك<br>منصة الباش مهندس محمد عبدالكريم محمد الإمام</p>
-        </div>
-        
-        <!-- بطاقة بدء الامتحان -->
-        <div class="start-card">
-          <h3>🎓 ابدأ الامتحان الآن</h3>
-          <div class="field">
-            <label>المادة الدراسية</label>
-            <select id="subject-select">
-              <option value="">جارٍ تحميل المواد...</option>
-            </select>
-            <div class="error" id="subject-error" hidden style="color:var(--danger); font-size:0.85rem; margin-top:4px;">اختر مادة أولاً.</div>
-          </div>
-          <div class="field">
-            <label>الاسم الثلاثي</label>
-            <input type="text" id="student-name" placeholder="اكتب اسمك الثلاثي" maxlength="60">
-            <div class="error" id="name-error" hidden style="color:var(--danger); font-size:0.85rem; margin-top:4px;">اكتب اسمك أولاً.</div>
-          </div>
-          <div class="field">
-            <label>الرقم الجامعي</label>
-            <input type="text" id="university-id" placeholder="أدخل رقمك الجامعي" maxlength="15">
-            <div class="error" id="id-error" hidden style="color:var(--danger); font-size:0.85rem; margin-top:4px;">أدخل رقماً صحيحاً.</div>
-          </div>
-          <div class="field">
-            <label>القسم</label>
-            <select id="department">
-              <option value="cs">علوم حاسوب</option>
-              <option value="it">تقنية معلومات</option>
-              <option value="networks">شبكات</option>
-              <option value="se">هندسة برمجيات</option>
-              <option value="is">نظم معلومات</option>
-              <option value="security">أمن معلومات</option>
-            </select>
-          </div>
-          <button class="btn btn-primary" id="start-exam">▶ بدء الامتحان الشامل</button>
-        </div>
+  <main id="home">
+    <section class="market-hero">
+      <div class="hero-content">
+        <p class="eyebrow">خدمات جيرانك.. أقرب وأسهل</p>
+        <h1>تحتاج خدمة؟<br><span>تلقاها من أهل منطقتك.</span></h1>
+        <p class="hero-description">ابحث عن كهربجي، سباك، معلم أو أي مقدم خدمة قريب منك، وتواصل معه مباشرة عبر واتساب.</p>
+        <a href="#providers" class="btn btn-gold hero-cta">اكتشف الخدمات <span aria-hidden="true">←</span></a>
+        <div class="hero-trust"><span>✓ بحث حسب منطقتك</span><span>✓ تواصل مباشر</span><span>✓ سجل خدمتك مجاناً</span></div>
       </div>
-
-      <!-- كروت الأقسام -->
-      <div class="action-cards">
-        <div class="action-card dark">
-          <div>
-            <h3>الامتحان الشامل</h3>
-            <p>أجب على جميع الأسئلة المختارة عشوائياً لمدة 30 دقيقة.</p>
-          </div>
-          <button class="btn btn-gold" id="start-exam-btn" onclick="document.getElementById('start-exam').click()">ابدأ الآن ▶</button>
-        </div>
-        <div class="action-card light">
-          <div>
-            <h3>المراجعة حسب الموضوع</h3>
-            <p>تدرب على موضوع محدد أو راجع أخطاءك السابقة.</p>
-          </div>
-          <div class="chips" id="topic-chips" style="margin-bottom:12px;"></div>
-          <button class="btn btn-ghost" id="start-practice" style="width:100%;">ابدأ التدريب ▶</button>
-        </div>
-      </div>
-
-      <!-- استئناف وسجل -->
-      <div id="resume-box" style="background:var(--gold); color:#111; padding:16px; border-radius:12px; margin-bottom:20px; display:none; align-items:center; justify-content:space-between; flex-wrap:wrap;">
-        <strong>لديك امتحان لم تنهِه.</strong>
-        <span id="resume-info"></span>
-        <div style="display:flex; gap:10px; margin-top:10px;">
-          <button class="btn btn-primary" id="resume-btn" style="padding:8px 16px; width:auto;">أكمل</button>
-          <button class="btn btn-ghost" id="discard-btn" style="padding:8px 16px; border-color:#111; color:#111;">حذف</button>
-        </div>
-      </div>
-
-      <div class="history" id="history" hidden>
-        <h3 style="margin-bottom:12px;">آخر نتائجك</h3>
-        <ul id="history-list" style="list-style:none; background:var(--card); border-radius:12px; border:1px solid var(--line); overflow:hidden;"></ul>
-      </div>
-
+      <div class="hero-art" aria-hidden="true"><div class="art-circle"><span>🛠️</span></div><div class="floating-tag tag-one">📍 قريب منك</div><div class="floating-tag tag-two">⚡ خدمات يومية</div></div>
     </section>
 
-    <!-- ===== شاشة الامتحان ===== -->
-    <section id="exam-screen" class="screen" hidden>
-      <div class="exam-header" style="flex-wrap: wrap; gap: 10px;">
-        <div style="flex:1;">
-          <div style="font-weight:700;" id="counter">سؤال 1 من 20</div>
-          <!-- شريط التقدم الذي يحتاجه app.js -->
-          <div class="progress" style="margin-top:8px; height:8px; background:var(--line); border-radius:99px; overflow:hidden;">
-            <i id="progress-fill" style="display:block; height:100%; background:var(--brand); width:0;"></i>
-          </div>
-        </div>
-        <div class="timer" id="timer">30:00</div>
-        <button class="btn btn-ghost" id="finish-btn" style="padding:8px 16px;">إنهاء الامتحان</button>
+    <section class="search-panel" aria-label="البحث عن خدمة">
+      <div class="search-heading"><h2>ابحث عن مقدم خدمة</h2><p>اكتب اسم الخدمة أو اختر التصنيف والمنطقة</p></div>
+      <div class="search-controls">
+        <label class="search-input"><span aria-hidden="true">⌕</span><input id="search-query" type="search" placeholder="مثال: كهربجي، سباك، مدرس..." autocomplete="off"></label>
+        <select id="category-filter" aria-label="تصنيف الخدمة"><option value="">كل الخدمات</option><option>كهربائي</option><option>سباك</option><option>نجار</option><option>معلم بناء</option><option>ميكانيكي</option><option>نظافة</option><option>مدرس</option><option>أخرى</option></select>
+        <input id="area-filter" type="search" placeholder="المنطقة / الحي" aria-label="المنطقة أو الحي">
+        <button id="location-button" class="btn btn-outline location-button" type="button"><span aria-hidden="true">⌖</span> الأقرب لي</button>
       </div>
-
-      <div style="display:grid; gap:20px; grid-template-columns:1fr;">
-        <div class="q-card" id="question-card"></div>
-        <div class="q-card" style="padding:16px;">
-          <h3 style="margin-bottom:12px; font-size:1rem;">قائمة الأسئلة</h3>
-          <div class="nav-grid" id="nav-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(36px, 1fr)); gap:8px;"></div>
-        </div>
-      </div>
+      <p class="location-note" id="location-status" aria-live="polite">يمكنك البحث بالمنطقة، أو السماح بالموقع لترتيب النتائج حسب القرب.</p>
     </section>
 
-    <!-- ===== شاشة النتيجة ===== -->
-    <section id="result-screen" class="screen" hidden>
-      <div class="q-card" style="text-align:center;">
-        <div class="ring" id="ring" style="width:150px; height:150px; border-radius:50%; border:10px solid var(--line); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:2rem; font-weight:800;">
-          <div id="ring-text">0%</div>
-        </div>
-        <h2 class="verdict" id="verdict" style="margin-bottom:10px;">النتيجة</h2>
-        <h3 id="result-name" style="color:var(--muted); font-weight:normal; margin-bottom:20px;"></h3>
-        <div id="result-stats" style="margin-bottom:20px; font-size:1.1rem;"></div>
-        <div id="topic-bars" style="text-align:right; margin-bottom:20px;"></div>
-        
-        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-          <button class="btn btn-primary" id="share-btn" style="width:auto;">مشاركة النتيجة</button>
-          <button class="btn btn-gold" id="cert-btn" hidden>طباعة الشهادة</button>
-          <button class="btn btn-ghost" id="retry-btn">امتحان جديد</button>
-          <button class="btn btn-ghost" id="home-btn">الرئيسية</button>
-        </div>
-      </div>
-      
-      <div class="review-tabs" style="display:flex; gap:10px; margin:20px 0;">
-        <button class="chip" data-filter="all" style="flex:1;" aria-pressed="true">كل الأسئلة</button>
-        <button class="chip" data-filter="wrong" style="flex:1;" aria-pressed="false">الأخطاء فقط</button>
-      </div>
-      <div class="q-card" id="review-container"></div>
+    <section class="services-section" id="providers">
+      <div class="section-heading"><div><p class="eyebrow">دليل المنطقة</p><h2>أصحاب الخدمات</h2></div><span id="results-count" class="results-count" aria-live="polite"></span></div>
+      <div id="provider-grid" class="provider-grid" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden><span>🔎</span><h3>ما لقينا نتائج مطابقة</h3><p>جرّب كلمة بحث مختلفة أو اختر منطقة أخرى.</p><button id="reset-search" class="btn btn-outline">عرض كل الخدمات</button></div>
     </section>
 
-  </div> <!-- نهاية الكونتينر -->
+    <section class="join-banner"><div><p class="eyebrow">عندك حرفة أو خدمة؟</p><h2>خلّي جيرانك يلقوك بسهولة.</h2><p>أنشئ ملفك وأضف خدمتك وموقعك ورقم واتساب للتواصل.</p></div><button class="btn btn-gold" id="join-provider">سجّل خدمتك مجاناً</button></section>
+    <aside class="prototype-note"><strong>نسخة تجريبية:</strong> الحسابات والإعلانات تحفظ حالياً على هذا الجهاز فقط، والإعلانات النموذجية للتوضيح وليست مقدمي خدمات حقيقيين. يلزم ربط قاعدة بيانات وخادم مصادقة لنشر دليل مشترك وآمن بين جميع المستخدمين.</aside>
+  </main>
 
-  <!-- ===== الفوتر والنوافذ المنبثقة ===== -->
-  <footer class="site-footer">
-    <div class="footer-links">
-      <button onclick="document.getElementById('about-modal').showModal()">عن المنصة</button>
-      <button onclick="document.getElementById('support-modal').showModal()">الدعم الفني</button>
-    </div>
-    <p>© 2026 جميع الحقوق محفوظة للباش مهندس محمد عبدالكريم محمد الإمام</p>
-  </footer>
+  <footer class="market-footer"><a class="market-logo" href="#home"><span class="logo-mark">أ</span><span>أهل الحي<small>الخدمات تبدأ من جيرانك</small></span></a><p>تواصل بأمان، وتأكد من تفاصيل الخدمة والسعر قبل الاتفاق.</p><a href="#home">العودة للأعلى ↑</a></footer>
 
-  <dialog id="about-modal">
-    <h3>عن المنصة</h3>
-    <p style="text-align:center; color:var(--muted); line-height:1.8;">
-      <strong>منصة الباش مهندس محمد عبدالكريم محمد الإمام</strong><br>
-      منصة تعليمية تفاعلية مخصصة لطلاب جامعة كرري. تهدف إلى مساعدتك على الاستعداد لامتحاناتك من خلال بيئة امتحان حقيقية، بنك أسئلة ضخم، تصحيح فوري، ومراجعة شاملة.
-    </p>
-    <button class="btn btn-primary" onclick="document.getElementById('about-modal').close()">إغلاق</button>
+  <dialog id="auth-dialog" class="market-dialog">
+    <button class="dialog-close" type="button" data-close="auth-dialog" aria-label="إغلاق">×</button>
+    <p class="eyebrow">مرحباً بك</p><h2 id="auth-title">دخول أو حساب جديد</h2><p class="dialog-help">هذه نسخة تجريبية؛ استخدم بيانات غير حساسة. لا تستخدم كلمة مرورك الحقيقية.</p>
+    <form id="auth-form">
+      <label class="form-field">الاسم<input id="auth-name" type="text" maxlength="60" placeholder="اسمك" required></label>
+      <label class="form-field">رقم واتساب<input id="auth-phone" type="tel" inputmode="tel" maxlength="20" placeholder="مثال: 2499XXXXXXXX" required></label>
+      <label class="form-field">المنطقة / الحي<input id="auth-area" type="text" maxlength="60" placeholder="مثال: بحري - كافوري" required></label>
+      <label class="form-field">كلمة مرور تجريبية<input id="auth-password" type="password" minlength="4" maxlength="64" placeholder="4 أحرف على الأقل" required></label>
+      <button class="btn btn-primary dialog-submit" type="submit">متابعة</button>
+    </form>
+    <p class="dialog-switch">لديك حساب؟ <button id="auth-mode-toggle" type="button">تسجيل الدخول</button></p>
+    <p id="auth-error" class="form-error" role="alert" hidden></p>
   </dialog>
 
-  <dialog id="support-modal">
-    <h3>الدعم الفني</h3>
-    <p style="text-align:center; color:var(--muted); margin-bottom:20px;">تواصل معنا مباشرة لأي مشكلة أو اقتراح:</p>
-    <div style="display:flex; gap:10px; flex-direction:column;">
-      <a href="https://wa.me/249923208354" target="_blank" class="btn btn-gold" style="text-decoration:none;">واتساب</a>
-      <a href="https://www.facebook.com/mohammedAbdalkreemMa" target="_blank" class="btn btn-primary" style="text-decoration:none; background:#1877F2;">فيسبوك</a>
-      <button class="btn btn-ghost" onclick="document.getElementById('support-modal').close()">إغلاق</button>
-    </div>
+  <dialog id="provider-dialog" class="market-dialog">
+    <button class="dialog-close" type="button" data-close="provider-dialog" aria-label="إغلاق">×</button>
+    <p class="eyebrow">أضف خدمتك</p><h2>عرّف أهل منطقتك بخدمتك</h2><p class="dialog-help">سجّل الدخول أولاً. لا تنشر رقم شخص آخر دون إذنه.</p>
+    <form id="provider-form">
+      <label class="form-field">اسم الخدمة<input id="provider-service" type="text" maxlength="50" placeholder="مثال: كهربائي منازل" required></label>
+      <label class="form-field">التصنيف<select id="provider-category" required><option value="">اختر التصنيف</option><option>كهربائي</option><option>سباك</option><option>نجار</option><option>معلم بناء</option><option>ميكانيكي</option><option>نظافة</option><option>مدرس</option><option>أخرى</option></select></label>
+      <label class="form-field">وصف مختصر<input id="provider-description" type="text" maxlength="140" placeholder="خبرتك والخدمات التي تقدمها" required></label>
+      <label class="form-field">المنطقة / الحي<input id="provider-area" type="text" maxlength="60" placeholder="اسم الحي" required></label>
+      <label class="form-field">رقم واتساب<input id="provider-phone" type="tel" inputmode="tel" maxlength="20" placeholder="مثال: 2499XXXXXXXX" required></label>
+      <button class="btn btn-primary dialog-submit" type="submit">نشر خدمتي</button>
+    </form>
+    <p id="provider-error" class="form-error" role="alert" hidden></p>
   </dialog>
-
-  <!-- نافذة تأكيد إنهاء الامتحان (مطلوبة للكود) -->
-  <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-text">
-    <h3 id="confirm-title">إنهاء الامتحان؟</h3>
-    <p id="confirm-text"></p>
-    <div class="row">
-      <button class="btn btn-primary" id="confirm-yes" type="button" style="width:100%;">نعم، أنهِ الآن</button>
-      <button class="btn btn-ghost" id="confirm-no" type="button" style="width:100%; margin-top:10px;">العودة للأسئلة</button>
-    </div>
-  </dialog>
-
-  <!-- الشهادة (مطلوبة للكود) -->
-  <div class="certificate" id="certificate" aria-hidden="true" style="display:none;">
-    <h2>شهادة اجتياز تدريب</h2>
-    <p>تشهد منصة امتحانات الباش مهندس محمد عبدالكريم محمد الإمام بأن الطالب</p>
-    <div class="cert-name" id="cert-name"></div>
-    <p class="cert-score" id="cert-score"></p>
-    <small id="cert-date" dir="ltr"></small>
-    <small>إعداد م. محمد عبدالكريم محمد الإمام</small>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-  <div class="offline-banner" id="offline-banner" style="display:none; background:var(--danger); color:white; text-align:center; padding:8px; position:fixed; bottom:0; width:100%; z-index:9999;">أنت غير متصل بالإنترنت. سيتم حفظ إجاباتك محلياً.</div>
-
-  <!-- السكربتات الأصلية -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous" defer></script>
-  <script src="app.js?v=16" defer></script>
+  <div id="market-toast" class="market-toast" role="status" aria-live="polite" hidden></div>
+  <script src="services.js" defer></script>
 </body>
 </html>
